@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class User extends ID {
+public class User extends AbstractParams {
+    private long id;
+
     private String name;
     private int age;
     private Gender gender;
@@ -22,7 +24,7 @@ public class User extends ID {
     private boolean isLogged;
 
     public User(long id, String name, Gender gender, String password, String city) {
-        super(id);
+        this.id = id;
         this.name = name;
         this.gender = gender;
         this.password = password;
@@ -42,6 +44,10 @@ public class User extends ID {
 //                '}';
 //    }
 
+
+    public long getId() {
+        return id;
+    }
 
     public List<Message> getMessages() {
         return messages;

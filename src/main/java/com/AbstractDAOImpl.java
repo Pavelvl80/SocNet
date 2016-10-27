@@ -1,13 +1,12 @@
 package com;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
 /**
  * Created by Edvard Piri on 13.10.2016.
  */
-public class AbstractDAOImpl<T extends ID> implements AbstractDAO<T> {
+public class AbstractDAOImpl<T extends AbstractParams> implements AbstractDAO<T> {
     List<T> db;
 
     @Override

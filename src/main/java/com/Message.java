@@ -2,10 +2,12 @@ package com;
 
 import java.util.Date;
 
-public class Message extends ID {
+public class Message extends AbstractParams {
 
     //in real systems string is not used
     //blob clob
+    private long id;
+
     private String msg;
 
 
@@ -20,13 +22,18 @@ public class Message extends ID {
     private boolean isActive;
 
     public Message(long id, String msg, User fromUser, User toUser) {
-        super(id);
+        this.id = id;
         this.msg = msg;
         this.fromUser = fromUser;
         this.toUser = toUser;
 
         this.dateSent = new Date();
         this.isActive = true;
+    }
+
+    @Override
+    public long getId() {
+        return id;
     }
 
     public MessageType getMessageType() {

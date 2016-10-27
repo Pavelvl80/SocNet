@@ -4,6 +4,6 @@
     <title>$Title$</title>
 </head>
 <body>
-${numb} messages user ${user.name} - ${user.messages}
+${numb} user of ${user.name} - ${user.messages}
 </body>
 </html>

@@ -46,7 +46,7 @@ public class MessagesController {
         ModelAndView modelAndView = new ModelAndView("message");
         user.getMessages();
         modelAndView.addObject("user", user);
-        modelAndView.addObject("numb", "all");
+        modelAndView.addObject("numb", "all messages");
         return modelAndView;
     }
 
@@ -56,7 +56,7 @@ public class MessagesController {
         ModelAndView modelAndView = new ModelAndView("message");
         user.getMessages().get(0);
         modelAndView.addObject("user", user);
-        modelAndView.addObject("numb", "first");
+        modelAndView.addObject("numb", "first message");
         return modelAndView;
     }
 }

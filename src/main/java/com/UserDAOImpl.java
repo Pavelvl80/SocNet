@@ -8,10 +8,6 @@ import java.util.List;
 @Repository
 public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
     //emulates db
-    private static List<User> users = new ArrayList<>();
-    {
-        db = users;
-    }
 
 
     //    @Override
@@ -23,18 +19,18 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
     @Override
     public void setLogin(User user) {
         if (user != null) {
-            int i = users.indexOf(user);
+            int i = getAll().indexOf(user);
 
             if (user.isLogged()) user.setLogged(false);
             else user.setLogged(true);
 
-            users.set(i, user);
+            getAll().set(i, user);
         }
     }
 
     @Override
     public User get(String name, String psw) {
-        for (User user : users) {
+        for (User user : getAll()) {
             if (user.getName().equals(name) && user.getPassword().equals(psw))
                 return user;
         }
@@ -43,9 +39,9 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
     @Override
     public User makeInactive(User user) {
-        int i = users.indexOf(user);
+        int i = getAll().indexOf(user);
         user.setActive(false);
-        users.set(i, user);
+        getAll().set(i, user);
 
         return user;
     }
@@ -63,7 +59,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
     @Override
     public void clean() {
-        users.removeAll(users);
+        getAll().removeAll(getAll());
     }
 
 //    @Override
