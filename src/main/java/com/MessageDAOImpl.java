@@ -40,4 +40,9 @@ public class MessageDAOImpl extends AbstractDAOImpl<Message> implements MessageD
 //        return null;
 //    }
 
+
+    @Override
+    public List<Message> getAll() {
+        return null;
+    }
 }

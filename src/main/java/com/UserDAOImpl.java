@@ -1,12 +1,12 @@
 package com;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
+public class UserDAOImpl extends AbstactDAOimplDB<Users> implements UserDAO {
     //emulates db
 
 
@@ -16,35 +16,35 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 //        return user;
 //    }
 
-    @Override
-    public void setLogin(User user) {
-        if (user != null) {
-            int i = getAll().indexOf(user);
+//    @Override
+//    public void setLogin(User user) {
+//        if (user != null) {
+//            int i = getAll().indexOf(user);
+//
+//            if (user.isLogged()) user.setLogged(false);
+//            else user.setLogged(true);
+//
+//            getAll().set(i, user);
+//        }
+//    }
 
-            if (user.isLogged()) user.setLogged(false);
-            else user.setLogged(true);
-
-            getAll().set(i, user);
-        }
-    }
-
-    @Override
-    public User get(String name, String psw) {
-        for (User user : getAll()) {
-            if (user.getName().equals(name) && user.getPassword().equals(psw))
-                return user;
-        }
-        return null;
-    }
-
-    @Override
-    public User makeInactive(User user) {
-        int i = getAll().indexOf(user);
-        user.setActive(false);
-        getAll().set(i, user);
-
-        return user;
-    }
+//    @Override
+//    public Users get(String name, String psw) {
+//        for (User user : getAll()) {
+//            if (user.getName().equals(name) && user.getPassword().equals(psw))
+//                return user;
+//        }
+//        return null;
+//    }
+//
+//    @Override
+//    public Users makeInactive(User user) {
+//        int i = getAll().indexOf(user);
+//        user.setActive(false);
+//        getAll().set(i, user);
+//
+//        return users;
+//    }
 
 //    @Override
 //    public List<User> getAll() {
@@ -57,10 +57,10 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 //        return user;
 //    }
 
-    @Override
-    public void clean() {
-        getAll().removeAll(getAll());
-    }
+//    @Override
+//    public void clean() {
+//        getAll().removeAll(getAll());
+//    }
 
 //    @Override
 //    public User delete(User user) {
@@ -71,4 +71,17 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 //    public User update(User user) {
 //        return null;
 //    }
+
+
+    @Override
+    public Users save(User user) {
+        return null;
+    }
+
+    @Override
+    public List<Users> getAll() {
+        String sql = "SELECT * FROM USERS";
+        Query query = getSession().createQuery(sql);
+        return query.list();
+    }
 }

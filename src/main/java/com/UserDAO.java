@@ -3,19 +3,19 @@ package com;
 import java.util.List;
 
 public interface UserDAO  {
-    User save(User user);
+    Users save(User user);
 
-    User get(String name, String psw);
+//    Users get(String name, String psw);
 
-    void setLogin(User user);
+//    void setLogin(User user);
 
-    List<User> getAll();
+    List<Users> getAll();
 
-    User delete(User user);
+//    Users delete(User user);
 
-    User makeInactive(User user);
+//    Users makeInactive(User user);
 
-    void clean();
+//    void clean();
 
-    User update(User user);
+//    Users update(User user);
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class User extends AbstractParams {
-    private long id;
+public class User extends BaseEntity {
+    private Long id;
 
     private String name;
     private int age;
@@ -45,7 +45,7 @@ public class User extends AbstractParams {
 //    }
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

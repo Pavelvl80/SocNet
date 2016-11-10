@@ -2,7 +2,7 @@ package com;
 
 import java.util.Date;
 
-public class Message extends AbstractParams {
+public class Message extends BaseEntity {
 
     //in real systems string is not used
     //blob clob
@@ -32,7 +32,7 @@ public class Message extends AbstractParams {
     }
 
     @Override
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
