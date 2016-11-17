@@ -1,24 +1,60 @@
 package com;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
-/**
- * Created by Edvard Piri on 13.10.2016.
- */
+@Repository
+@Transactional
 public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
+    List<T> list = new ArrayList<>();
 
-    @Override
-    public T save(T t) {
-        return t;
+    public AbstractDAOImpl() {
     }
 
 //    @Override
-//    public T update(T t) {
+//    public List<T> getAllUsers() {
 //        return null;
 //    }
 
-//    @Override
-//    public List<T> getAll() {
-//        return null;
-//    }
+
+
+    @Override
+    public T saveUser(T t) {
+        list.add(t);
+        return t;
+    }
+
+   /* @Override
+    public List<T> getAll() {
+        return list;
+    }
+    @Override
+    public T findById(long id) {
+        for (T t : list) {
+            if (t.getId() == id) return t;
+        }
+        return null;
+    }
+    @Override
+    public T delete(T t) {
+        list.remove(t);
+        return t;
+    }
+    @Override
+    public T update(T t) {
+        UnaryOperator<T> unaryOperator = new UnaryOperator<T>() {
+            @Override
+            public T apply(T k) {
+                if (k.getId() == t.getId())
+                    return t;
+                else return k;
+            }
+        };
+        list.replaceAll(unaryOperator);
+        return t;
+    }*/
 }

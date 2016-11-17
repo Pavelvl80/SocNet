@@ -4,8 +4,6 @@
     <title>$Title$</title>
 </head>
 <body>
-Congrats, ${user.name}, you are ${state} !
-${user.city}
-${user.id}
+Congrats, ${user.userName}, you are ${state} !
 </body>
 </html>

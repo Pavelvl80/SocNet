@@ -3,8 +3,6 @@ package com;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created by Edvard Piri on 22.10.2016.
  */
@@ -12,32 +10,27 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-//    @Autowired
-//    private UserDAO userDAO;
-//
-//
-//    @Override
-//    public User save(User user) throws Exception {
-//        User savedUser = userDAO.save(user);
-//        if (savedUser == null) throw new Exception("user is not saved");
-//
-//        user.setLogged(true);
-//
-//        return savedUser;
-//    }
+    @Autowired
+    private UserDAO userDAO;
+
+
+    @Override
+    public Users save(Users user) throws Exception {
+        return userDAO.save(user);
+    }
 //
 //    @Override
-//    public User get(String name, String psw) {
+//    public UserAll get(String name, String psw) {
 //        return userDAO.get(name, psw);
 //    }
 //
 //    @Override
-//    public void setLogin(User user) {
+//    public void setLogin(UserAll user) {
 //        userDAO.setLogin(user);
 //    }
 //
 //    @Override
-//    public List<User> getAll() {
+//    public List<UserAll> getAll() {
 //        return userDAO.getAll();
 //    }
 //
@@ -47,7 +40,7 @@ public class UserServiceImpl implements UserService {
 //    }
 //
 //    @Override
-//    public void addToFriend(User fromUser, User toUser) throws Exception {
+//    public void addToFriend(UserAll fromUser, UserAll toUser) throws Exception {
 //
 //        if (!fromUser.isLogged()) throw new Exception("you are is not logged in");
 //
@@ -57,8 +50,8 @@ public class UserServiceImpl implements UserService {
 //
 //
 //    @Override
-//    public User login(String userName, String password) {
-//        User curUser = userDAO.get(userName, password);
+//    public UserAll login(String userName, String password) {
+//        UserAll curUser = userDAO.get(userName, password);
 //        if (curUser != null) {
 //            curUser.setLogged(true);
 //            userDAO.update(curUser);
@@ -68,7 +61,7 @@ public class UserServiceImpl implements UserService {
 //    }
 //
 //    @Override
-//    public User logout(User user) {
+//    public UserAll logout(UserAll user) {
 //        user.setLogged(false);
 //        userDAO.update(user);
 //        return user;

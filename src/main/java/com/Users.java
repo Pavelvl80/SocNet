@@ -1,5 +1,8 @@
 package com;
 
+
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,9 +26,21 @@ public class Users extends BaseEntity {
 
     private String attributes;
 
+    public Users() {
+    }
+
+    public Users(String email, String password, String type) {
+        this.email = email;
+        this.password = password;
+        this.type = type;
+
+        this.isActive = 1;
+        this.registered = new Date();
+        this.lastLogin = new Date();
+    }
 
     @Id
-    @SequenceGenerator(name = "TEST_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "TEST_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEST_SEQ")
     public Long getId() {
         return id;
@@ -66,7 +81,7 @@ public class Users extends BaseEntity {
     }
 
 
-    @Column(name = "DATE_REGISTER")
+    @Column(name = "DATE_REGISTERED")
     public Date getRegistered() {
         return registered;
     }
@@ -132,5 +147,22 @@ public class Users extends BaseEntity {
 
     public void setAttributes(String attributes) {
         this.attributes = attributes;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", type='" + type + '\'' +
+                ", city='" + city + '\'' +
+                ", phone='" + phone + '\'' +
+                ", registered=" + registered +
+                ", lastLogin=" + lastLogin +
+                ", isActive=" + isActive +
+                ", attributes='" + attributes + '\'' +
+                '}';
     }
 }

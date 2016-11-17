@@ -11,6 +11,12 @@ public class MessageDAOImpl extends AbstractDAOImpl<Message> implements MessageD
 //        return message;
 //    }
 
+
+    @Override
+    public Message save(Message message) {
+        return null;
+    }
+
     @Override
     public List<Message> getByUserId(long id) {
         List<Message> res = new ArrayList<>();
@@ -26,7 +32,7 @@ public class MessageDAOImpl extends AbstractDAOImpl<Message> implements MessageD
     }
 
     @Override
-    public List<Message> getByUser(User user) {
+    public List<Message> getByUser(UserAll user) {
         return null;
     }
 //

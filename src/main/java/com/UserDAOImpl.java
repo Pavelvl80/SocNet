@@ -2,22 +2,24 @@ package com;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-public class UserDAOImpl extends AbstactDAOimplDB<Users> implements UserDAO {
+@Transactional
+public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
     //emulates db
 
 
     //    @Override
-//    public User save(User user) {
+//    public UserAll save(UserAll user) {
 //        users.add(user);
 //        return user;
 //    }
 
 //    @Override
-//    public void setLogin(User user) {
+//    public void setLogin(UserAll user) {
 //        if (user != null) {
 //            int i = getAll().indexOf(user);
 //
@@ -30,7 +32,7 @@ public class UserDAOImpl extends AbstactDAOimplDB<Users> implements UserDAO {
 
 //    @Override
 //    public Users get(String name, String psw) {
-//        for (User user : getAll()) {
+//        for (UserAll user : getAll()) {
 //            if (user.getName().equals(name) && user.getPassword().equals(psw))
 //                return user;
 //        }
@@ -38,7 +40,7 @@ public class UserDAOImpl extends AbstactDAOimplDB<Users> implements UserDAO {
 //    }
 //
 //    @Override
-//    public Users makeInactive(User user) {
+//    public Users makeInactive(UserAll user) {
 //        int i = getAll().indexOf(user);
 //        user.setActive(false);
 //        getAll().set(i, user);
@@ -47,12 +49,12 @@ public class UserDAOImpl extends AbstactDAOimplDB<Users> implements UserDAO {
 //    }
 
 //    @Override
-//    public List<User> getAll() {
+//    public List<UserAll> getAll() {
 //        return users;
 //    }
 //
 //    @Override
-//    public User save(User user) {
+//    public UserAll save(UserAll user) {
 //        users.add(user);
 //        return user;
 //    }
@@ -63,25 +65,36 @@ public class UserDAOImpl extends AbstactDAOimplDB<Users> implements UserDAO {
 //    }
 
 //    @Override
-//    public User delete(User user) {
+//    public UserAll delete(UserAll user) {
 //        return null;
 //    }
 //
 //    @Override
-//    public User update(User user) {
+//    public UserAll update(UserAll user) {
 //        return null;
 //    }
 
 
     @Override
-    public Users save(User user) {
-        return null;
+    public Users save(Users user) {
+        return saveUser(user);
     }
 
     @Override
     public List<Users> getAll() {
-        String sql = "SELECT * FROM USERS";
-        Query query = getSession().createQuery(sql);
+        String hql = "from Users t";
+        Query query = getSession().createQuery(hql);
+        return query.list();
+
+//        return getAllUsers();
+//        List<User> result = (List<User>) session.createQuery("from User").list();
+//        List<User> result = (List<User>) session.createQuery("from users").list();
+    }
+
+    @Override
+    public List<Users> getByUser() {
+        String hql = "from Users t where t.id = 1003";
+        Query query = getSession().createQuery(hql);
         return query.list();
     }
 }

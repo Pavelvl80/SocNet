@@ -11,8 +11,8 @@ public class Message extends BaseEntity {
     private String msg;
 
 
-    private User fromUser;
-    private User toUser;
+    private UserAll fromUser;
+    private UserAll toUser;
 
     private Date dateSent;
     private Date dateRead;
@@ -21,7 +21,7 @@ public class Message extends BaseEntity {
 
     private boolean isActive;
 
-    public Message(long id, String msg, User fromUser, User toUser) {
+    public Message(long id, String msg, UserAll fromUser, UserAll toUser) {
         this.id = id;
         this.msg = msg;
         this.fromUser = fromUser;
@@ -57,11 +57,11 @@ public class Message extends BaseEntity {
         return msg;
     }
 
-    public User getFromUser() {
+    public UserAll getFromUser() {
         return fromUser;
     }
 
-    public User getToUser() {
+    public UserAll getToUser() {
         return toUser;
     }
 

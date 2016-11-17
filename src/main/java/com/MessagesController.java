@@ -16,14 +16,14 @@ public class MessagesController {
 //
 //
 //    @RequestMapping("/sendMessage")
-//    ModelAndView sendMessage(/*User fromUser, User toUser, String msg*/) throws Exception {
+//    ModelAndView sendMessage(/*UserAll fromUser, UserAll toUser, String msg*/) throws Exception {
 ////        if (!fromUser.isLogged()) throw new Exception("you are is not logged in");
 //
 ////        Message message = new Message(id, msg, fromUser, toUser);
 //        ModelAndView modelAndView = new ModelAndView("sent");
 //
-//        User fromUser = userDAO.get("Roman", "123");
-//        User toUser = userDAO.get("Roman", "123");
+//        UserAll fromUser = userDAO.get("Roman", "123");
+//        UserAll toUser = userDAO.get("Roman", "123");
 //
 //        Message message = new Message(id, "TEST", fromUser, toUser);
 //
@@ -42,7 +42,7 @@ public class MessagesController {
 //
 //    @RequestMapping("/getUserMessages")
 //    ModelAndView getUserMessages() {
-//        User user = userDAO.get("Roman", "123");
+//        UserAll user = userDAO.get("Roman", "123");
 //        ModelAndView modelAndView = new ModelAndView("message");
 //        user.getMessages();
 //        modelAndView.addObject("user", user);
@@ -52,7 +52,7 @@ public class MessagesController {
 //
 //    @RequestMapping("/getFirstUserMessage")
 //    ModelAndView getFirstUserMessage() {
-//        User user = userDAO.get("Roman", "123");
+//        UserAll user = userDAO.get("Roman", "123");
 //        ModelAndView modelAndView = new ModelAndView("message");
 //        user.getMessages().get(0);
 //        modelAndView.addObject("user", user);

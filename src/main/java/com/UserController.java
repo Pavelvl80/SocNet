@@ -15,14 +15,14 @@ public class UserController {
     UserDAO userDAO;
 
 //
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
 //
 //    //    db connection emulator
 //    private MessageDAO messageDAO = new MessageDAOImpl();
 //
-////    User login(String name, String password) throws Exception {
-////        User curUser = userDAO.get(name, password);
+////    UserAll login(String name, String password) throws Exception {
+////        UserAll curUser = userDAO.get(name, password);
 ////
 ////        if (curUser == null)
 ////            throw new Exception("wrong username or password");
@@ -37,7 +37,7 @@ public class UserController {
 //        String name = "denis";
 //        String password = "111";
 //
-//        User curUser = userService.get(name, password);
+//        UserAll curUser = userService.get(name, password);
 //        userService.setLogin(curUser);
 //
 //        ModelAndView modelAndView = new ModelAndView("welcome");
@@ -59,29 +59,40 @@ public class UserController {
     }
 //
 //    @RequestMapping("/logout")
-//    ModelAndView logout(User user) {
+//    ModelAndView logout(UserAll user) {
 //        userService.logout(user);
 //        return new ModelAndView("home");
 //    }
 //
-//    @RequestMapping("/register")
-//    ModelAndView register() throws Exception {
-//        User user = new User(1001, "Roman", Gender.MALE, "123", "Kiev");
-//
-//        User savedUser = userService.save(user);
-//
-//        ModelAndView modelAndView = new ModelAndView("welcome");
-//        modelAndView.addObject("user", savedUser);
-//        modelAndView.addObject("state", "register");
-//
-//        return modelAndView;
-//    }
+    @RequestMapping("/register")
+    ModelAndView register() throws Exception {
+        Users user = new Users("mai@l.com", "12345", "admin");
+
+        Users savedUser = userService.save(user);
+
+        ModelAndView modelAndView = new ModelAndView("welcome");
+        modelAndView.addObject("user", savedUser);
+        modelAndView.addObject("state", "register");
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/profile")
+    ModelAndView profile() throws Exception {
+        List<Users> userProfile = userDAO.getByUser();
+        Users user = userProfile.get(0);
+
+        ModelAndView modelAndView = new ModelAndView("profile");
+        modelAndView.addObject("user", user);
+
+        return modelAndView;
+    }
 //
 //    void addToFriend() throws Exception {
-//        List<User> userList = userService.getAll();
+//        List<UserAll> userList = userService.getAll();
 //
-//        User fromUser = userList.get(0);
-//        User toUser = userList.get(1);
+//        UserAll fromUser = userList.get(0);
+//        UserAll toUser = userList.get(1);
 //
 //        fromUser.getFriends().add(toUser);
 //        toUser.getFriends().add(fromUser);
@@ -106,14 +117,14 @@ public class UserController {
 ////    }
 //
 //
-//    Map<User, List<Message>> getMessageByUsers(List<User> users) {
-//        //TODO make implemetation
+//    Map<UserAll, List<Message>> getMessageByUsers(List<UserAll> users) {
+//       //TODO make implemetation
 //        //задание: разделить сообщения по юзерам (fromUser)
-//        Map<User, List<Message>> messages = new HashMap<>();
+//        Map<UserAll, List<Message>> messages = new HashMap<>();
 //        List<Message> allMessages = messageDAO.getAll();
 //        allMessages.forEach(message -> messages.put(message.getFromUser(), null));
 //
-//        for (Map.Entry<User, List<Message>> entry : messages.entrySet()) {
+//        for (Map.Entry<UserAll, List<Message>> entry : messages.entrySet()) {
 //            ArrayList<Message> timeList = new ArrayList<>();
 //            for (Message message : allMessages) {
 //                if (message.getFromUser().equals(entry.getKey())) timeList.add(message);

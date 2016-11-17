@@ -11,7 +11,7 @@ public interface MessageDAO {
 
     List<Message> getByUserId(long id);
 
-    List<Message> getByUser(User user);
+    List<Message> getByUser(UserAll user);
 
     List<Message> getAll();
 }

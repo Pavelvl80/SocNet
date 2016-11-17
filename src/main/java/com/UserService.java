@@ -10,20 +10,20 @@ import java.util.List;
 
 @Repository
 public interface UserService {
-//    User save(User user) throws Exception;
+    Users save(Users user) throws Exception;
 //
-//    User get(String name, String psw);
+//    UserAll get(String name, String psw);
 //
-//    void setLogin(User user);
+//    void setLogin(UserAll user);
 //
-//    List<User> getAll();
+//    List<UserAll> getAll();
 //
 //    void clean();
 //
-//    void addToFriend(User fromUser, User toUser) throws Exception;
+//    void addToFriend(UserAll fromUser, UserAll toUser) throws Exception;
 //
-//    User login(String userName, String password);
+//    UserAll login(String userName, String password);
 //
-//    User logout(User user);
+//    UserAll logout(UserAll user);
 
 }
