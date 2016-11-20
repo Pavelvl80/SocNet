@@ -3,7 +3,7 @@
 <head>
     <title>$Title$</title>
 </head>
-<br>
-${users}
+<body>
+in system ${users.size()} users!
 </body>
 </html>

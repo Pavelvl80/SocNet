@@ -3,6 +3,8 @@ package com;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Edvard Piri on 22.10.2016.
  */
@@ -18,7 +20,24 @@ public class UserServiceImpl implements UserService {
     public Users save(Users user) throws Exception {
         return userDAO.save(user);
     }
-//
+
+    @Override
+    public String registerUser(Users user) {
+        Users users = userDAO.getByEmailOrUserName(user.getEmail(), user.getUserName());
+
+        if (users != null)
+            return "User with this email or name is registered";
+
+        userDAO.save(user);
+        return "registered";
+    }
+
+    @Override
+    public List<Users> getUsers() {
+        return userDAO.getAll();
+    }
+
+    //
 //    @Override
 //    public UserAll get(String name, String psw) {
 //        return userDAO.get(name, psw);
@@ -34,10 +53,10 @@ public class UserServiceImpl implements UserService {
 //        return userDAO.getAll();
 //    }
 //
-//    @Override
-//    public void clean() {
-//        userDAO.clean();
-//    }
+    @Override
+    public void clean() {
+        userDAO.clean();
+    }
 //
 //    @Override
 //    public void addToFriend(UserAll fromUser, UserAll toUser) throws Exception {

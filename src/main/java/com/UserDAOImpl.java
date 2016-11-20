@@ -4,7 +4,9 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Transactional
@@ -59,18 +61,13 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 //        return user;
 //    }
 
-//    @Override
-//    public void clean() {
-//        getAll().removeAll(getAll());
-//    }
+    @Override
+    public void clean() {
+        delete();
+    }
 
 //    @Override
 //    public UserAll delete(UserAll user) {
-//        return null;
-//    }
-//
-//    @Override
-//    public UserAll update(UserAll user) {
 //        return null;
 //    }
 
@@ -92,9 +89,19 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
     }
 
     @Override
-    public List<Users> getByUser() {
+    public Users getByUser() {
         String hql = "from Users t where t.id = 1003";
         Query query = getSession().createQuery(hql);
-        return query.list();
+        return (Users) query.uniqueResult();
+    }
+
+    @Override
+    public Users getByEmailOrUserName(String email, String userName) {
+        String requestToDb = "from Users t where t.email = :emailParam or t.userName = :userNameParam";
+        Query query = getSession().createQuery(requestToDb);
+        query.setParameter("emailParam", email);
+        query.setParameter("userNameParam", userName);
+
+        return (Users) query.uniqueResult();
     }
 }

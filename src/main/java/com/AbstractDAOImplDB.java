@@ -32,12 +32,18 @@ public class AbstractDAOImplDB<T extends BaseEntity> implements AbstractDAO<T> {
         return t;
     }
 
-//    @Override
+    //    @Override
 //    public List<T> getAllUsers() {
 //        String sql = "SELECT t FROM USERS";
 //        Query query = getSession().createQuery(sql);
 //        return query.list();
 //    }
+    @Override
+    public void delete() {
+        String hql = "delete from Users t";
+        Query query = getSession().createQuery(hql);
+        query.executeUpdate();
+    }
 
     public Session getSession() {
         return entityManager.unwrap(Session.class);

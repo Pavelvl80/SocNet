@@ -8,6 +8,8 @@ public interface AbstractDAO<T extends BaseEntity> {
 
 //    List<T> getAllUsers();
 
+    void delete();
+
 //    T update(T t);
 
 //    List<T> getAll();

@@ -11,6 +11,8 @@ import java.util.*;
 
 @Controller
 public class UserController {
+
+
     @Autowired
     UserDAO userDAO;
 
@@ -51,10 +53,19 @@ public class UserController {
 //
     @RequestMapping("/users")
     ModelAndView getUsers() {
-        List<Users> users = userDAO.getAll();
+        List<Users> users = userService.getUsers();
 
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", users);
+        return modelAndView;
+    }
+
+    @RequestMapping("/countUsers")
+    ModelAndView countUsers() {
+        List<Users> users = userService.getUsers();
+
+        ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", users.size());
         return modelAndView;
     }
 //
@@ -66,12 +77,13 @@ public class UserController {
 //
     @RequestMapping("/register")
     ModelAndView register() throws Exception {
-        Users user = new Users("mai@l.com", "12345", "admin");
+        Users user = new Users("mai@l.com", "12345", "admin", "Lotar");
 
-        Users savedUser = userService.save(user);
+        String savedUser = userService.registerUser(user);
 
         ModelAndView modelAndView = new ModelAndView("welcome");
-        modelAndView.addObject("user", savedUser);
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("result", savedUser);
         modelAndView.addObject("state", "register");
 
         return modelAndView;
@@ -79,11 +91,10 @@ public class UserController {
 
     @RequestMapping("/profile")
     ModelAndView profile() throws Exception {
-        List<Users> userProfile = userDAO.getByUser();
-        Users user = userProfile.get(0);
+        Users userProfile = userDAO.getByUser();
 
         ModelAndView modelAndView = new ModelAndView("profile");
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", userProfile);
 
         return modelAndView;
     }
@@ -98,13 +109,13 @@ public class UserController {
 //        toUser.getFriends().add(fromUser);
 //    }
 //
-//    @RequestMapping("/clean")
-//    ModelAndView clean() {
-//        userService.clean();
-//        ModelAndView modelAndView = new ModelAndView("users");
-//        modelAndView.addObject("users", userService.getAll());
-//        return modelAndView;
-//    }
+    @RequestMapping("/clean")
+    ModelAndView clean() {
+        userService.clean();
+        ModelAndView modelAndView = new ModelAndView("users");
+        modelAndView.addObject("users", userService.getUsers().size());
+        return modelAndView;
+    }
 //
 //
 //    //getUserMessages - size - count messages

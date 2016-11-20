@@ -29,10 +29,11 @@ public class Users extends BaseEntity {
     public Users() {
     }
 
-    public Users(String email, String password, String type) {
+    public Users(String email, String password, String type, String userName) {
         this.email = email;
         this.password = password;
         this.type = type;
+        this.userName = userName;
 
         this.isActive = 1;
         this.registered = new Date();
@@ -151,18 +152,7 @@ public class Users extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Users{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", type='" + type + '\'' +
-                ", city='" + city + '\'' +
-                ", phone='" + phone + '\'' +
-                ", registered=" + registered +
-                ", lastLogin=" + lastLogin +
-                ", isActive=" + isActive +
-                ", attributes='" + attributes + '\'' +
-                '}';
+        return "email='" + email + '\'' +
+                ", userName='" + userName + '\'';
     }
 }

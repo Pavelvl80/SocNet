@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface UserService {
     Users save(Users user) throws Exception;
+
+    String registerUser(Users user);
 //
 //    UserAll get(String name, String psw);
 //
@@ -18,12 +20,13 @@ public interface UserService {
 //
 //    List<UserAll> getAll();
 //
-//    void clean();
+    void clean();
 //
 //    void addToFriend(UserAll fromUser, UserAll toUser) throws Exception;
 //
 //    UserAll login(String userName, String password);
 //
 //    UserAll logout(UserAll user);
+    List<Users> getUsers();
 
 }

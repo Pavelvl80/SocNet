@@ -21,6 +21,10 @@ public class AbstractDAOImpl<T extends BaseEntity> implements AbstractDAO<T> {
 //    }
 
 
+    @Override
+    public void delete() {
+
+    }
 
     @Override
     public T saveUser(T t) {
