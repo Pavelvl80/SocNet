@@ -4,9 +4,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 @Transactional
@@ -15,34 +13,47 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 
 
     //    @Override
-//    public UserAll save(UserAll user) {
+//    public UserOld saveMessage(UserOld user) {
 //        users.add(user);
 //        return user;
 //    }
 
-//    @Override
-//    public void setLogin(UserAll user) {
-//        if (user != null) {
-//            int i = getAll().indexOf(user);
-//
-//            if (user.isLogged()) user.setLogged(false);
-//            else user.setLogged(true);
-//
-//            getAll().set(i, user);
-//        }
-//    }
 
-//    @Override
-//    public Users get(String name, String psw) {
-//        for (UserAll user : getAll()) {
-//            if (user.getName().equals(name) && user.getPassword().equals(psw))
+    @Override
+    public Integer isLogin() {
+        String selectByEmailAndPass = "from Users t where t.id = 1026";
+        Query query = getSession().createQuery(selectByEmailAndPass);
+        Users user = (Users) query.uniqueResult();
+        return user.getIsLogin();
+    }
+
+    @Override
+    public void setLogin(Users user) {
+        user.setIsLogin(1);
+        entityManager.merge(user);
+    }
+
+    @Override
+    public void logout(Users user) {
+        user.setIsLogin(0);
+        entityManager.merge(user);
+    }
+
+    @Override
+    public Users get(String email, String psw) {
+//        for (Users user : getAll()) {
+//            if (user.getEmail().equals(email) && user.getPassword().equals(psw))
 //                return user;
 //        }
-//        return null;
-//    }
+        String selectByEmailAndPass = "from Users t where t.email = :emailParam and t.password = :passwordParam";
+        Query query = getSession().createQuery(selectByEmailAndPass);
+        query.setParameter("emailParam", email);
+        query.setParameter("passwordParam", psw);
+        return (Users) query.uniqueResult();
+    }
 //
 //    @Override
-//    public Users makeInactive(UserAll user) {
+//    public Users makeInactive(UserOld user) {
 //        int i = getAll().indexOf(user);
 //        user.setActive(false);
 //        getAll().set(i, user);
@@ -51,12 +62,12 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 //    }
 
 //    @Override
-//    public List<UserAll> getAll() {
+//    public List<UserOld> getAll() {
 //        return users;
 //    }
 //
 //    @Override
-//    public UserAll save(UserAll user) {
+//    public UserOld saveMessage(UserOld user) {
 //        users.add(user);
 //        return user;
 //    }
@@ -67,14 +78,14 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
     }
 
 //    @Override
-//    public UserAll delete(UserAll user) {
+//    public UserOld delete(UserOld user) {
 //        return null;
 //    }
 
 
     @Override
-    public Users save(Users user) {
-        return saveUser(user);
+    public Users saveUser(Users user) {
+        return save(user);
     }
 
     @Override
@@ -90,7 +101,7 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 
     @Override
     public Users getByUser() {
-        String hql = "from Users t where t.id = 1003";
+        String hql = "from Users t where t.id = 1026";
         Query query = getSession().createQuery(hql);
         return (Users) query.uniqueResult();
     }

@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserAll extends BaseEntity {
+public class UserOld extends BaseEntity {
     private Long id;
 
     private String name;
     private int age;
     private Gender gender;
     private String password;
-    private List<UserAll> friends;
-    private List<Message> messages;
+    private List<UserOld> friends;
+    private List<Messages> messages;
 
     private String city;
     private Date dateRegistered;
@@ -23,7 +23,7 @@ public class UserAll extends BaseEntity {
     //temlporary
     private boolean isLogged;
 
-    public UserAll(long id, String name, Gender gender, String password, String city) {
+    public UserOld(long id, String name, Gender gender, String password, String city) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -38,7 +38,7 @@ public class UserAll extends BaseEntity {
 
 //    @Override
 //    public String toString() {
-//        return "UserAll{" +
+//        return "UserOld{" +
 //                "name='" + name + '\'' +
 //                ", city='" + city + '\'' +
 //                '}';
@@ -49,11 +49,11 @@ public class UserAll extends BaseEntity {
         return id;
     }
 
-    public List<Message> getMessages() {
+    public List<Messages> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(List<Messages> messages) {
         this.messages = messages;
     }
 
@@ -89,11 +89,11 @@ public class UserAll extends BaseEntity {
         this.password = password;
     }
 
-    public List<UserAll> getFriends() {
+    public List<UserOld> getFriends() {
         return friends;
     }
 
-    public void setFriends(List<UserAll> friends) {
+    public void setFriends(List<UserOld> friends) {
         this.friends = friends;
     }
 

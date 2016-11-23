@@ -16,15 +16,16 @@ public class UserController {
     @Autowired
     UserDAO userDAO;
 
-//
+    //
     @Autowired
     private UserService userService;
-//
+
+    //
 //    //    db connection emulator
 //    private MessageDAO messageDAO = new MessageDAOImpl();
 //
-////    UserAll login(String name, String password) throws Exception {
-////        UserAll curUser = userDAO.get(name, password);
+////    UserOld login(String name, String password) throws Exception {
+////        UserOld curUser = userDAO.get(name, password);
 ////
 ////        if (curUser == null)
 ////            throw new Exception("wrong username or password");
@@ -33,24 +34,29 @@ public class UserController {
 ////
 ////        return curUser;
 ////    }
-//
-//    @RequestMapping("/login")
-//    ModelAndView login() throws Exception {
-//        String name = "denis";
-//        String password = "111";
-//
-//        UserAll curUser = userService.get(name, password);
-//        userService.setLogin(curUser);
-//
-//        ModelAndView modelAndView = new ModelAndView("welcome");
-//        if (curUser == null)
-//            modelAndView = new ModelAndView("error");
-//        else modelAndView = new ModelAndView("welcome");
-//        modelAndView.addObject("user", curUser);
-//        modelAndView.addObject("state", "logged in");
-//        return modelAndView;
-//    }
-//
+
+    @RequestMapping("/isLogin")
+    ModelAndView isLogin() {
+        String msg = userService.checkIsLogin();
+        ModelAndView modelAndView = new ModelAndView("text");
+        modelAndView.addObject("text", msg);
+        return modelAndView;
+    }
+
+    @RequestMapping("/login")
+    ModelAndView login() throws Exception {
+        String email = "victor@mail.com";
+        String password = "12345";
+
+        String result = userService.login(email, password);
+
+        ModelAndView modelAndView = new ModelAndView("welcome");
+        modelAndView.addObject("result", result);
+        modelAndView.addObject("state", "logged in");
+        return modelAndView;
+    }
+
+    //
     @RequestMapping("/users")
     ModelAndView getUsers() {
         List<Users> users = userService.getUsers();
@@ -68,16 +74,22 @@ public class UserController {
         modelAndView.addObject("users", users.size());
         return modelAndView;
     }
-//
-//    @RequestMapping("/logout")
-//    ModelAndView logout(UserAll user) {
-//        userService.logout(user);
-//        return new ModelAndView("home");
-//    }
-//
+
+    //
+    @RequestMapping("/logout")
+    ModelAndView logout() {
+        Users user = new Users("victor@mail.com", "12345", "admin", "Victor");
+
+        userService.logout(user);
+        ModelAndView modelAndView = new ModelAndView("text");
+        modelAndView.addObject("text", "logout complete");
+        return modelAndView;
+    }
+
+    //
     @RequestMapping("/register")
     ModelAndView register() throws Exception {
-        Users user = new Users("mai@l.com", "12345", "admin", "Lotar");
+        Users user = new Users("victor@mail.com", "12345", "admin", "Victor");
 
         String savedUser = userService.registerUser(user);
 
@@ -98,20 +110,21 @@ public class UserController {
 
         return modelAndView;
     }
-//
+
+    //
 //    void addToFriend() throws Exception {
-//        List<UserAll> userList = userService.getAll();
+//        List<UserOld> userList = userService.getAll();
 //
-//        UserAll fromUser = userList.get(0);
-//        UserAll toUser = userList.get(1);
+//        UserOld fromUser = userList.get(0);
+//        UserOld toUser = userList.get(1);
 //
 //        fromUser.getFriends().add(toUser);
 //        toUser.getFriends().add(fromUser);
 //    }
 //
-    @RequestMapping("/clean")
+    @RequestMapping("/cleanUsers")
     ModelAndView clean() {
-        userService.clean();
+        userService.cleanUsers();
         ModelAndView modelAndView = new ModelAndView("users");
         modelAndView.addObject("users", userService.getUsers().size());
         return modelAndView;
@@ -122,22 +135,22 @@ public class UserController {
 //    //getMessages()
 //
 //
-////    List<Message> getMessages(long userId) {
+////    List<Messages> getMessages(long userId) {
 ////        //if (!fromUser.isLogged()) throw new Exception("you are is not logged in");
 ////        return messageDAO.getByUserId(userId);
 ////    }
 //
 //
-//    Map<UserAll, List<Message>> getMessageByUsers(List<UserAll> users) {
+//    Map<UserOld, List<Messages>> getMessageByUsers(List<UserOld> users) {
 //       //TODO make implemetation
 //        //задание: разделить сообщения по юзерам (fromUser)
-//        Map<UserAll, List<Message>> messages = new HashMap<>();
-//        List<Message> allMessages = messageDAO.getAll();
+//        Map<UserOld, List<Messages>> messages = new HashMap<>();
+//        List<Messages> allMessages = messageDAO.getAll();
 //        allMessages.forEach(message -> messages.put(message.getFromUser(), null));
 //
-//        for (Map.Entry<UserAll, List<Message>> entry : messages.entrySet()) {
-//            ArrayList<Message> timeList = new ArrayList<>();
-//            for (Message message : allMessages) {
+//        for (Map.Entry<UserOld, List<Messages>> entry : messages.entrySet()) {
+//            ArrayList<Messages> timeList = new ArrayList<>();
+//            for (Messages message : allMessages) {
 //                if (message.getFromUser().equals(entry.getKey())) timeList.add(message);
 //            }
 //            entry.setValue(timeList);
@@ -145,10 +158,10 @@ public class UserController {
 //        return messages;
 //    }
 //
-//    List<Message> outboxMessages(long userId) {
+//    List<Messages> outboxMessages(long userId) {
 //        //TODO make implemetation
-//        List<Message> allMessages = messageDAO.getByUserId(userId);
-//        List<Message> outBoxMessages = new ArrayList<>();
+//        List<Messages> allMessages = messageDAO.getByUserId(userId);
+//        List<Messages> outBoxMessages = new ArrayList<>();
 //
 //        allMessages.forEach(message -> {
 //            if (message.getMessageType() != null && message.getMessageType().equals(MessageType.OUT))
@@ -158,10 +171,10 @@ public class UserController {
 //        return outBoxMessages;
 //    }
 //
-//    List<Message> inboxMessages(long userId) {
+//    List<Messages> inboxMessages(long userId) {
 //        //TODO make implemetation
-//        List<Message> allMessages = messageDAO.getByUserId(userId);
-//        List<Message> inBoxMessages = new ArrayList<>();
+//        List<Messages> allMessages = messageDAO.getByUserId(userId);
+//        List<Messages> inBoxMessages = new ArrayList<>();
 //
 //        allMessages.forEach(message -> {
 //            if (message.getMessageType() != null && message.getMessageType().equals(MessageType.IN))

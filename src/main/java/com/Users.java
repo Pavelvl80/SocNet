@@ -22,6 +22,7 @@ public class Users extends BaseEntity {
     private String phone;
     private Date registered;
     private Date lastLogin;
+    private Integer isLogin;
     private Integer isActive;
 
     private String attributes;
@@ -93,6 +94,10 @@ public class Users extends BaseEntity {
         return lastLogin;
     }
 
+    @Column(name = "IS_LOGIN")
+    public Integer getIsLogin() {
+        return isLogin;
+    }
 
     @Column(name = "IS_ACTIVE")
     public Integer getIsActive() {
@@ -140,6 +145,10 @@ public class Users extends BaseEntity {
 
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public void setIsLogin(Integer isLogin) {
+        this.isLogin = isLogin;
     }
 
     public void setIsActive(Integer isActive) {

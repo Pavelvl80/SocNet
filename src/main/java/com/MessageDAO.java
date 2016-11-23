@@ -1,17 +1,20 @@
 package com;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * Created by Edvard Piri on 13.10.2016.
  */
+@Repository
 public interface MessageDAO {
 
-    Message save(Message message);
+    Messages saveMessage(Messages message);
 
-    List<Message> getByUserId(long id);
+    List<Messages> getByUserId(long id);
 
-    List<Message> getByUser(UserAll user);
+    List<Messages> getByUser(UserOld user);
 
-    List<Message> getAll();
+    List<Messages> getAll();
 }

@@ -4,7 +4,7 @@ package com;
 import java.util.List;
 
 public interface AbstractDAO<T extends BaseEntity> {
-    T saveUser(T t);
+    T save(T t);
 
 //    List<T> getAllUsers();
 
@@ -14,5 +14,5 @@ public interface AbstractDAO<T extends BaseEntity> {
 
 //    List<T> getAll();
 
-//    List<T> getByUser(T t);
+//    Long getById(Long id);
 }

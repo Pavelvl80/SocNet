@@ -13,20 +13,24 @@ public interface UserService {
     Users save(Users user) throws Exception;
 
     String registerUser(Users user);
+
+    String logout(Users user);
 //
-//    UserAll get(String name, String psw);
+//    UserOld get(String name, String psw);
 //
-//    void setLogin(UserAll user);
+//    void setLogin(Users user);
 //
-//    List<UserAll> getAll();
+//    List<UserOld> getAll();
 //
-    void clean();
+    void cleanUsers();
 //
-//    void addToFriend(UserAll fromUser, UserAll toUser) throws Exception;
+//    void addToFriend(UserOld fromUser, UserOld toUser) throws Exception;
 //
-//    UserAll login(String userName, String password);
+    String login(String userName, String password);
 //
-//    UserAll logout(UserAll user);
+//    UserOld logout(UserOld user);
     List<Users> getUsers();
+
+    String checkIsLogin();
 
 }

@@ -1,7 +1,5 @@
 package com;
 
-import com.AbstractDAO;
-import com.BaseEntity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -27,7 +25,7 @@ public class AbstractDAOImplDB<T extends BaseEntity> implements AbstractDAO<T> {
     }
 
     @Override
-    public T saveUser(T t) {
+    public T save(T t) {
         entityManager.persist(t);
         return t;
     }

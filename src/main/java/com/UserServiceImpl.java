@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users save(Users user) throws Exception {
-        return userDAO.save(user);
+        return userDAO.saveUser(user);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         if (users != null)
             return "User with this email or name is registered";
 
-        userDAO.save(user);
+        userDAO.saveUser(user);
         return "registered";
     }
 
@@ -39,27 +39,29 @@ public class UserServiceImpl implements UserService {
 
     //
 //    @Override
-//    public UserAll get(String name, String psw) {
+//    public UserOld get(String name, String psw) {
 //        return userDAO.get(name, psw);
 //    }
 //
 //    @Override
-//    public void setLogin(UserAll user) {
+//    public void setLogin(Users user) {
 //        userDAO.setLogin(user);
 //    }
-//
+
+    //
 //    @Override
-//    public List<UserAll> getAll() {
+//    public List<UserOld> getAll() {
 //        return userDAO.getAll();
 //    }
 //
     @Override
-    public void clean() {
+    public void cleanUsers() {
         userDAO.clean();
     }
-//
+
+    //
 //    @Override
-//    public void addToFriend(UserAll fromUser, UserAll toUser) throws Exception {
+//    public void addToFriend(UserOld fromUser, UserOld toUser) throws Exception {
 //
 //        if (!fromUser.isLogged()) throw new Exception("you are is not logged in");
 //
@@ -68,21 +70,37 @@ public class UserServiceImpl implements UserService {
 //    }
 //
 //
-//    @Override
-//    public UserAll login(String userName, String password) {
-//        UserAll curUser = userDAO.get(userName, password);
-//        if (curUser != null) {
-//            curUser.setLogged(true);
-//            userDAO.update(curUser);
-//        }
-//        return curUser;
-//
-//    }
-//
-//    @Override
-//    public UserAll logout(UserAll user) {
-//        user.setLogged(false);
-//        userDAO.update(user);
-//        return user;
-//    }
+    @Override
+    public String login(String email, String pass) {
+        String result = "wrong pass or email";
+        Users curUser = userDAO.get(email, pass);
+
+        if (curUser != null) {
+            userDAO.setLogin(curUser);
+            result = "welcome";
+        }
+        return result;
+
+    }
+
+    //
+    @Override
+    public String logout(Users user) {
+        String result = "Error";
+        Users finUser = userDAO.getByUser();
+        if (finUser != null) {
+            userDAO.logout(finUser);
+            result = "Successful logout";
+        }
+        return result;
+    }
+
+    @Override
+    public String checkIsLogin() {
+        String result = "yes";
+        if (userDAO.isLogin() == null || userDAO.isLogin() == 0) result = "no";
+        return result;
+    }
+
+
 }
