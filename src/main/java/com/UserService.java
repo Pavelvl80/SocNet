@@ -33,4 +33,6 @@ public interface UserService {
 
     String checkIsLogin();
 
+    Long getUsersCount();
+
 }

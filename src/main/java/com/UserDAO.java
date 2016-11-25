@@ -9,13 +9,13 @@ public interface UserDAO {
 
     Users getByEmailOrUserName(String email, String userName);
 
-    void setLogin(Users user);
+    void setLoginStatus(Users user, int i);
 
     List<Users> getAll();
 
 //    Users delete(UserOld user);
 
-    void logout(Users user);
+//    void logout(Users user);
 
     void clean();
 
@@ -23,6 +23,8 @@ public interface UserDAO {
     Users getByUser();
 
     Integer isLogin();
+
+    Long getCount();
 
 
 }

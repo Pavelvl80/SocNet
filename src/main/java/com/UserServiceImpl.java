@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
         return userDAO.getAll();
     }
 
+    @Override
+    public Long getUsersCount() {
+        return userDAO.getCount();
+    }
+
     //
 //    @Override
 //    public UserOld get(String name, String psw) {
@@ -77,7 +82,7 @@ public class UserServiceImpl implements UserService {
         Users curUser = userDAO.get(email, pass);
 
         if (curUser != null) {
-            userDAO.setLogin(curUser);
+            userDAO.setLoginStatus(curUser, 1);
             result = "welcome";
         }
         return result;
@@ -88,8 +93,9 @@ public class UserServiceImpl implements UserService {
     public String logout(Users user) {
         String result = "Error";
         Users finUser = userDAO.getByUser();
+
         if (finUser != null) {
-            userDAO.logout(finUser);
+            userDAO.setLoginStatus(finUser, 0);
             result = "Successful logout";
         }
         return result;
@@ -98,7 +104,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String checkIsLogin() {
         String result = "yes";
-        if (userDAO.isLogin() == null || userDAO.isLogin() == 0) result = "no";
+        if (userDAO.isLogin() == 0) result = "no";
         return result;
     }
 

@@ -24,21 +24,26 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
         String selectByEmailAndPass = "from Users t where t.id = 1026";
         Query query = getSession().createQuery(selectByEmailAndPass);
         Users user = (Users) query.uniqueResult();
+        if (user.getIsLogin() == null) user.setIsLogin(0);
         return user.getIsLogin();
     }
 
     //rewrite these two methods in one
     @Override
-    public void setLogin(Users user) {
-        user.setIsLogin(1);
+    public void setLoginStatus(Users user, int i) {
+        //первый вариант: через if
+//        if (user.getIsLogin() == null || user.getIsLogin() == 0) user.setIsLogin(1);
+//        else user.setIsLogin(0);
+        //второй: через доп параметр
+        user.setIsLogin(i);
         entityManager.merge(user);
     }
 
-    @Override
-    public void logout(Users user) {
-        user.setIsLogin(0);
-        entityManager.merge(user);
-    }
+//    @Override
+//    public void logout(Users user) {
+//        user.setIsLogin(0);
+//        entityManager.merge(user);
+//    }
 
     @Override
     public Users get(String email, String psw) {
@@ -94,6 +99,14 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 //        return getAllUsers();
 //        List<User> result = (List<User>) session.createQuery("from User").list();
 //        List<User> result = (List<User>) session.createQuery("from users").list();
+    }
+
+
+    @Override
+    public Long getCount() {
+        String hql = "select count(*) from Users t";
+        Query query = getSession().createQuery(hql);
+        return (Long) query.uniqueResult();
     }
 
     @Override

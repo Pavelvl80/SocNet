@@ -25,12 +25,6 @@ public class MessagesController {
         Users toUser = userList.get(1);
         Messages messages = new Messages("Привет!! тест", fromUser, toUser);
 
-       /* if (!fromUser.isLogged()) {
-            ModelAndView modelAndView = new ModelAndView("error");
-            modelAndView.addObject("error", "you are is not logged in");
-            return modelAndView;
-        }*/
-
         messageDAO.saveMessage(messages);
 
         ModelAndView modelAndView = new ModelAndView("text");

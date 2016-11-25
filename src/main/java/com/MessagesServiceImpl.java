@@ -9,6 +9,9 @@ public class MessagesServiceImpl implements MessagesService {
     @Autowired
     MessageDAO messageDAO;
 
+    @Autowired
+    UserDAO userDAO;
+
 
     @Override
     public Messages sendMessage(Messages message) {
@@ -18,5 +21,10 @@ public class MessagesServiceImpl implements MessagesService {
     @Override
     public int msgCount(long userId) {
         return messageDAO.getByUserId(userId).size();
+    }
+
+    @Override
+    public Integer isLogged() {
+        return null;
     }
 }

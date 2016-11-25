@@ -68,11 +68,10 @@ public class UserController {
 
     @RequestMapping("/countUsers")
     ModelAndView countUsers() {
-        //write it also using sql count function
-        List<Users> users = userService.getUsers();
+        Long usersCount = userService.getUsersCount();
 
-        ModelAndView modelAndView = new ModelAndView("users");
-        modelAndView.addObject("users", users.size());
+        ModelAndView modelAndView = new ModelAndView("usersCount");
+        modelAndView.addObject("usersCount", usersCount);
         return modelAndView;
     }
 
@@ -126,8 +125,8 @@ public class UserController {
     @RequestMapping("/cleanUsers")
     ModelAndView clean() {
         userService.cleanUsers();
-        ModelAndView modelAndView = new ModelAndView("users");
-        modelAndView.addObject("users", userService.getUsers().size());
+        ModelAndView modelAndView = new ModelAndView("usersCount");
+        modelAndView.addObject("usersCount", userService.getUsersCount());
         return modelAndView;
     }
 //

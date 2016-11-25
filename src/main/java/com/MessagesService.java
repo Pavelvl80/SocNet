@@ -7,4 +7,8 @@ public interface MessagesService {
     Messages sendMessage(Messages message);
 
     int msgCount(long userId);
+
+    Integer isLogged();
+
+
 }
