@@ -27,6 +27,7 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
         return user.getIsLogin();
     }
 
+    //rewrite these two methods in one
     @Override
     public void setLogin(Users user) {
         user.setIsLogin(1);
