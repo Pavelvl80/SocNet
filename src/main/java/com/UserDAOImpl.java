@@ -41,10 +41,6 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 
     @Override
     public Users get(String email, String psw) {
-//        for (Users user : getAll()) {
-//            if (user.getEmail().equals(email) && user.getPassword().equals(psw))
-//                return user;
-//        }
         String selectByEmailAndPass = "from Users t where t.email = :emailParam and t.password = :passwordParam";
         Query query = getSession().createQuery(selectByEmailAndPass);
         query.setParameter("emailParam", email);

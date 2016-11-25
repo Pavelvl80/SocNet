@@ -68,6 +68,7 @@ public class UserController {
 
     @RequestMapping("/countUsers")
     ModelAndView countUsers() {
+        //write it also using sql count function
         List<Users> users = userService.getUsers();
 
         ModelAndView modelAndView = new ModelAndView("users");

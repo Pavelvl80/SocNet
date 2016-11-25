@@ -4,6 +4,10 @@
     <title>$Title$</title>
 </head>
 <br>
-${users}
+<!--list need to be looper here -->
+<c:forEach items="${users}" var="user">
+    <!--finish it here-->
+</c:forEach>
+
 </body>
 </html>

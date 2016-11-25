@@ -72,6 +72,8 @@ public class UserServiceImpl implements UserService {
 //
     @Override
     public String login(String email, String pass) {
+        //user isLogged true should be added to DB column
+        //isLogged column should be added to db as well
         String result = "wrong pass or email";
         Users curUser = userDAO.get(email, pass);
 
