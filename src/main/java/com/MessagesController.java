@@ -40,4 +40,9 @@ public class MessagesController {
         return modelAndView;
     }*/
 
+   //TODO implementation
+//   @RequestMapping("/inbox")
+//    ModelAndView inbox() {
+//   }
+
 }
