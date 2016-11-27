@@ -1,0 +1,9 @@
+.idea
+pom.xml
+SocNet.iml
+web/META-INF
+web/WEB-INF/classes
+web/WEB-INF/lib
+web/WEB-INF/dispatcher-servlet.xml
+web/WEB-INF/web.xml
+target
