@@ -1,5 +1,7 @@
 package com;
 
+import org.hibernate.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
 //        return message;
 //    }
 
+    @Autowired
+    UserDAO userDAO;
 
     @Override
     public Messages saveMessage(Messages message) {
@@ -21,17 +25,13 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Messages> getByUserId(long id) {
-        List<Messages> res = new ArrayList<>();
-
-        //select * from users where user.is != 101
-
-        for (Messages messages : getAll()) {
-            if (messages.getFromUser().getId() == id
-                    || messages.getToUser().getId() == id) res.add(messages);
-        }
-
-        return res;
+        String hql = "from Messages t where t.fromUser = :fromUserId OR t.toUser = :toUserId";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("fromUserId", id);
+        query.setParameter("toUserId", id);
+        return query.list();
     }
 
     @Override
