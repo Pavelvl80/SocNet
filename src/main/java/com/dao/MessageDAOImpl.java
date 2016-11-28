@@ -1,7 +1,7 @@
 package com.dao;
 
 import com.model.Messages;
-import com.model.UserOld;
+import com.model.Users;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,9 +26,9 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public List<Messages> getByUserId(long id) {
-        String hql = "from Messages t where t.fromUser = :fromUserId OR t.toUser = :toUserId";
+//    @SuppressWarnings("unchecked")
+    public List<Messages> getByUserId(Long id) {
+        String hql = "from Messages t where t.fromUser.id = :fromUserId OR t.toUser.id = :toUserId";
         Query query = getSession().createQuery(hql);
         query.setParameter("fromUserId", id);
         query.setParameter("toUserId", id);
@@ -36,7 +36,7 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
     }
 
     @Override
-    public List<Messages> getByUser(UserOld user) {
+    public List<Messages> getByUser(Users user) {
         return null;
     }
 //

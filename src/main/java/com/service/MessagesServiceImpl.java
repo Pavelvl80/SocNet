@@ -3,8 +3,11 @@ package com.service;
 import com.model.Messages;
 import com.dao.MessageDAO;
 import com.dao.UserDAO;
+import com.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -29,5 +32,15 @@ public class MessagesServiceImpl implements MessagesService {
     @Override
     public Integer isLogged() {
         return null;
+    }
+
+    @Override
+    public List<Messages> getMessagesByUser(Users user) {
+        return messageDAO.getByUserId(user.getId());
+    }
+
+    @Override
+    public Messages saveMessageService(Messages messages) {
+        return messageDAO.saveMessage(messages);
     }
 }

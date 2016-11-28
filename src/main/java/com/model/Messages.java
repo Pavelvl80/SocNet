@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 @Table(name = "MESSAGES")
 public class Messages extends BaseEntity {
-    private long id;
+    private Long id;
     private String msg;
 
     private Users fromUser;
@@ -41,6 +41,9 @@ public class Messages extends BaseEntity {
     //     return user;
     // }
 
+
+    public Messages() {
+    }
 
     @Id
     @SequenceGenerator(name = "MESSAGES_SEQ", sequenceName = "SEQUENCE", allocationSize = 1)
@@ -81,7 +84,7 @@ public class Messages extends BaseEntity {
         return toUser;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -108,4 +111,5 @@ public class Messages extends BaseEntity {
     public void setActive(boolean active) {
         isActive = active;
     }
+
 }

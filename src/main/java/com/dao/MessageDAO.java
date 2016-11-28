@@ -1,5 +1,7 @@
 package com.dao;
 
+import com.model.Messages;
+import com.model.Users;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,9 +14,9 @@ public interface MessageDAO {
 
     Messages saveMessage(Messages message);
 
-    List<Messages> getByUserId(long id);
+    List<Messages> getByUserId(Long id);
 
-    List<Messages> getByUser(UserOld user);
+    List<Messages> getByUser(Users user);
 
     List<Messages> getAll();
 }

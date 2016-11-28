@@ -5,6 +5,7 @@ import com.model.Messages;
 import com.model.Users;
 import com.dao.MessageDAO;
 import com.dao.UserDAO;
+import com.service.MessagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import java.util.List;
 public class MessagesController {
 
     @Autowired
-    private MessageDAO messageDAO;
+    private MessagesService messagesService;
 
     @Autowired
     private UserDAO userDAO;
@@ -29,7 +30,7 @@ public class MessagesController {
         Users toUser = userList.get(1);
         Messages messages = new Messages("Привет!! тест", fromUser, toUser);
 
-        messageDAO.saveMessage(messages);
+        messagesService.saveMessageService(messages);
 
         ModelAndView modelAndView = new ModelAndView("text");
         modelAndView.addObject("text", "messages was sent");
@@ -44,10 +45,15 @@ public class MessagesController {
         return modelAndView;
     }*/
 
-   //TODO implementation
-//   @RequestMapping("/inbox")
-//    ModelAndView inbox() {
-//    test
-//   }
+    //TODO implementation
+    @RequestMapping("/inbox")
+    ModelAndView inbox(/*Users user*/) {
+        Users users = userDAO.getAll().get(0);
+        List<Messages> messages = messagesService.getMessagesByUser(users);
+
+        ModelAndView modelAndView = new ModelAndView("messagesList");
+        modelAndView.addObject("messages", messages);
+        return modelAndView;
+    }
 
 }
