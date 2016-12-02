@@ -17,7 +17,7 @@ public interface MessagesService {
 
     Messages saveMessageService(Messages messages);
 
-    List<Messages> getMessagesByUser(Users users);
+    List<Messages> getMessagesByUser(Long id);
 
 
 

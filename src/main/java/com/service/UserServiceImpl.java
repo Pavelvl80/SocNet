@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public String login(String email, String pass) {
         String result = "wrong pass or email";
         //commit sql scripts for adding column also
-        Users curUser = userDAO.get(email, pass);
+        Users curUser = userDAO.get(email, pass);// user or null
 
         if (curUser != null) {
             userDAO.setLoginStatus(curUser, 1);

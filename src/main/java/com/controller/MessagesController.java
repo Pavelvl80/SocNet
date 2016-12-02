@@ -45,14 +45,14 @@ public class MessagesController {
         return modelAndView;
     }*/
 
-    //TODO implementation
     @RequestMapping("/inbox")
     ModelAndView inbox(/*Users user*/) {
-        Users users = userDAO.getAll().get(0);
-        List<Messages> messages = messagesService.getMessagesByUser(users);
+        Users user = userDAO.getAll().get(0);
+        List<Messages> messages = messagesService.getMessagesByUser(user.getId());
 
         ModelAndView modelAndView = new ModelAndView("messagesList");
         modelAndView.addObject("messages", messages);
+        modelAndView.addObject("userName", user.getUserName());
         return modelAndView;
     }
 

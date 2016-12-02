@@ -36,8 +36,8 @@ public class MessagesServiceImpl implements MessagesService {
 
     //TODO you don't need to use all USERS object, just id is enough
     @Override
-    public List<Messages> getMessagesByUser(Users user) {
-        return messageDAO.getByUserId(user.getId());
+    public List<Messages> getMessagesByUser(Long id) {
+        return messageDAO.getByUserId(id);
     }
 
     @Override

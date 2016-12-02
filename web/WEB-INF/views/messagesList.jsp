@@ -5,8 +5,8 @@
     <title>$Title$</title>
 </head>
 <br>
-<!--this is bad way to call userName, too complex, just add userName to model attributes
-${messages.get(0).getFromUser().getUserName()}'s messages: <br>
+<!--this is bad way to call userName, too complex, just add userName to model attributes -->
+${UserName}'s messages: <br>
 <br>
 <c:forEach items="${messages}" var="message">
     To user: ${message.toUser.userName} <br> text: ${message.msg} <br> data sent ${message.dateSent}, data read ${message.dateRead} <br>
