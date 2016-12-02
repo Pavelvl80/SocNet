@@ -5,6 +5,7 @@
     <title>$Title$</title>
 </head>
 <br>
+<!--this is bad way to call userName, too complex, just add userName to model attributes
 ${messages.get(0).getFromUser().getUserName()}'s messages: <br>
 <br>
 <c:forEach items="${messages}" var="message">
