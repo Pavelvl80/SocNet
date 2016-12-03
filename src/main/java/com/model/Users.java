@@ -34,6 +34,7 @@ public class Users extends BaseEntity {
         this.type = type;
         this.userName = userName;
 
+        this.isLogin = 0;
         this.isActive = 1;
         this.registered = new Date();
         this.lastLogin = new Date();

@@ -71,4 +71,24 @@ public class MessagesController {
         return modelAndView;
     }
 
+    @RequestMapping("/sendMessageIfLogin")
+    ModelAndView sendMessageIfLogin() {
+        List<Users> userList = userDAO.getAll();
+        Users fromUser = userList.get(0);
+        Users toUser = userList.get(1);
+        Messages messages = new Messages("ХАЛО!! тест", fromUser, toUser);
+
+        String text = messagesService.saveMessageIfLogin(messages);
+
+        ModelAndView modelAndView = new ModelAndView("text");
+        modelAndView.addObject("text", text);
+        return modelAndView;
+    }
+
+//    @RequestMapping("/sendMessageToFriend")
+//    ModelAndView sendMessageToFriend() {
+//        List<Users> userList = userDAO.getAll();
+//        Users fromUser = userList.get(0);
+//    }
+
 }

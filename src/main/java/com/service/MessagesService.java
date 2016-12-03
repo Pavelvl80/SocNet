@@ -21,4 +21,6 @@ public interface MessagesService {
 
     Messages deleteMessage(Messages message);
 
+    String saveMessageIfLogin(Messages messages);
+
 }

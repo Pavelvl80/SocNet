@@ -47,6 +47,16 @@ public class MessagesServiceImpl implements MessagesService {
 
     @Override
     public Messages deleteMessage(Messages message) {
-        return messageDAO.changeActiveStatus(message, 1);
+        return messageDAO.changeActiveStatus(message, 0);
+    }
+
+    @Override
+    public String saveMessageIfLogin(Messages messages) {
+        String result = "error";
+        if (messages.getFromUser().getIsLogin() == 1) {
+            messageDAO.saveMessage(messages);
+            result = "sent";
+        }
+        return result;
     }
 }

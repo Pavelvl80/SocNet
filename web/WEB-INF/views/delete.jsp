@@ -4,6 +4,6 @@
     <title>$Title$</title>
 </head>
 <body>
-${message} was deleted
+${message.id} was deleted
 </body>
 </html>
