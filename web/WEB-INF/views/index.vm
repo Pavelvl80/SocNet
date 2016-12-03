@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title></title>
+</head>
+
+
+<body>
+<header>
+  Test
+</header>
+
+
+
+
+
+<script src="//cdn.polyfill.io/v1/polyfill.js?features=es6"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script>
+    $("#submit").click(function () {
+        if (isEmptyField($('#email').val()) || isEmptyField($('#password').val())) {
+            showError('Заполните все поля');
+        } else if (!validateEmail($('#email').val())) {
+            showError('Введите корректный email');
+        } else {
+            $.ajax({
+                url: "login_request",
+                data: ({
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                }),
+                dataType: "json",
+                success: function (data) {
+                    if (!data.error) {
+                        if (~location.href.indexOf('login')) {
+                            location.href = '/';
+                        } else location.reload(true);
+                    }
+                    else {
+                        $('#password').val("");
+                        showError('Неверный логин или пароль');
+                    }
+                },
+                error: function (xhr) {
+                    showError('We will review this issue and you will be noticed via email');
+                }
+            });
+        }
+    });
+</script>
+
+
+
+
+</body>
+</html>

@@ -7,3 +7,4 @@
 ${message.id} was deleted
 </body>
 </html>
+
