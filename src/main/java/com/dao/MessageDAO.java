@@ -16,7 +16,9 @@ public interface MessageDAO {
 
     List<Messages> getByUserId(Long id);
 
-    List<Messages> getByUser(Users user);
+//    List<Messages> getByUser(Users user);
 
     List<Messages> getAll();
+
+    Messages changeActiveStatus(Messages message, int i);
 }

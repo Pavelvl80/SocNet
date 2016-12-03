@@ -19,6 +19,6 @@ public interface MessagesService {
 
     List<Messages> getMessagesByUser(Long id);
 
-
+    Messages deleteMessage(Messages message);
 
 }

@@ -14,5 +14,5 @@ public interface AbstractDAO<T extends BaseEntity> {
 
 //    List<T> getAll();
 
-//    Long getById(Long id);
+//    T getById(Long id);
 }

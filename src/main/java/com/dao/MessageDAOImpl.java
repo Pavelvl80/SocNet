@@ -35,10 +35,10 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
         return query.list();
     }
 
-    @Override
-    public List<Messages> getByUser(Users user) {
-        return null;
-    }
+//    @Override
+//    public List<Messages> getByUser(Users user) {
+//        return null;
+//    }
 //
 //    @Override
 //    public List<Messages> getAll() {
@@ -54,5 +54,11 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
     @Override
     public List<Messages> getAll() {
         return null;
+    }
+
+    @Override
+    public Messages changeActiveStatus(Messages message, int i) {
+        message.setActive(i);
+        return entityManager.merge(message);
     }
 }

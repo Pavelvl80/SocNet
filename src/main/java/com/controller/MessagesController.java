@@ -20,6 +20,9 @@ public class MessagesController {
     private MessagesService messagesService;
 
     @Autowired
+    private MessageDAO messageDAO;
+
+    @Autowired
     private UserDAO userDAO;
 
 
@@ -53,6 +56,18 @@ public class MessagesController {
         ModelAndView modelAndView = new ModelAndView("messagesList");
         modelAndView.addObject("messages", messages);
         modelAndView.addObject("userName", user.getUserName());
+        return modelAndView;
+    }
+
+    @RequestMapping("/deleteMessage")
+    ModelAndView deleteMessage(/*Long id*/) {
+        Messages messageFromDB = messageDAO.getByUserId(1025l).get(0);
+
+        Messages message = messagesService.deleteMessage(messageFromDB);
+
+        ModelAndView modelAndView = new ModelAndView("delete");
+        modelAndView.addObject("message", message);
+
         return modelAndView;
     }
 

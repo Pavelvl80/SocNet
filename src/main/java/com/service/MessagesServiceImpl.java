@@ -44,4 +44,9 @@ public class MessagesServiceImpl implements MessagesService {
     public Messages saveMessageService(Messages messages) {
         return messageDAO.saveMessage(messages);
     }
+
+    @Override
+    public Messages deleteMessage(Messages message) {
+        return messageDAO.changeActiveStatus(message, 1);
+    }
 }

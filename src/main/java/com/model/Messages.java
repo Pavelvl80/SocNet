@@ -15,7 +15,7 @@ public class Messages extends BaseEntity {
     private Date dateSent;
     private Date dateRead;
 
-    private boolean isActive;
+    private int isActive;
 
     public Messages(String msg, Users fromUser, Users toUser) {
         this.msg = msg;
@@ -23,7 +23,7 @@ public class Messages extends BaseEntity {
         this.toUser = toUser;
 
         this.dateSent = new Date();
-        this.isActive = true;
+        this.isActive = 1;
     }
 
 
@@ -68,7 +68,7 @@ public class Messages extends BaseEntity {
     }
 
     @Column(name = "IS_ACTIVE")
-    public boolean isActive() {
+    public int isActive() {
         return isActive;
     }
 
@@ -108,7 +108,7 @@ public class Messages extends BaseEntity {
         this.dateRead = dateRead;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         isActive = active;
     }
 

@@ -55,4 +55,5 @@ public class AbstractDAOImplDB<T extends BaseEntity> implements AbstractDAO<T> {
 //        return query.list();
 //    }
 
+
 }
