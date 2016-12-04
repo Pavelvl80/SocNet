@@ -24,7 +24,7 @@ public interface UserDAO {
     //    Users update(UserOld user);
     Users getByUser();
 
-    Integer isLogin();
+    Integer isLogin(Long id);
 
     Long getCount();
 

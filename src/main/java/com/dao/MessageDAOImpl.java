@@ -61,4 +61,13 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
         message.setActive(i);
         return entityManager.merge(message);
     }
+
+    @Override
+    public List<Messages> getTenLastMessagesByUserId(Long id) {
+        String hql = "from Messages t where t.id.fromUser.id = :idParam order by t.id DESC";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("idParam", id);
+        query.setMaxResults(10);
+        return query.list();
+    }
 }

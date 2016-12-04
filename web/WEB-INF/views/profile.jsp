@@ -4,15 +4,15 @@
     <title>$Title$</title>
 </head>
 <body>
-${user.id} - id <br>
-${user.email} - email <br>
-${user.userName} - user name <br>
-${user.password} - paswword <br>
-${user.type} - type <br>
-${user.city} - city<br>
-${user.phone} - phone<br>
-${user.registered} - registration date <br>
-${user.lastLogin} - last active <br>
-${user.attributes} - attributes
+id = ${user.id} <br>
+email = ${user.email} <br>
+user name = ${user.userName} <br>
+password = ${user.password} <br>
+type = ${user.type} <br>
+city = ${user.city}<br>
+phone = ${user.phone}<br>
+reg. date = ${user.registered}<br>
+last active = ${user.lastLogin} <br>
+attributes = ${user.attributes}
 </body>
 </html>

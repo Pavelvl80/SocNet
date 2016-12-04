@@ -2,9 +2,12 @@ package com.service;
 
 import com.model.Users;
 import com.dao.UserDAO;
+import com.sun.deploy.nativesandbox.comm.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -104,11 +107,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String checkIsLogin() {
-        String result = "yes";
-        if (userDAO.isLogin() == 0) result = "no";
+    public Users checkIsLogin(Users user) {
+        Users result = null;
+        Integer a = userDAO.isLogin(user.getId());
+        if (a == 1) result = user;
         return result;
     }
 
-
+    @Override
+    public String forProfile(Users user) {
+        return null;
+    }
 }

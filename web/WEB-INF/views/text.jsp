@@ -4,6 +4,6 @@
     <title>$Title$</title>
 </head>
 <body>
-${text}
+${result} ${state} ${user}
 </body>
 </html>

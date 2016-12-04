@@ -23,4 +23,6 @@ public interface MessagesService {
 
     String saveMessageIfLogin(Messages messages);
 
+    List<Messages> getLastNumbMessagesByUserId(Long id);
+
 }

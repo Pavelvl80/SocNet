@@ -4,7 +4,6 @@
     <title>$Title$</title>
 </head>
 <body>
-<%--Congrats, ${user.userName}, you are ${state} !--%>
-${result}
+login page
 </body>
 </html>

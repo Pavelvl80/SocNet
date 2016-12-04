@@ -21,9 +21,10 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 
 
     @Override
-    public Integer isLogin() {
-        String selectByEmailAndPass = "from Users t where t.id = 1026";
+    public Integer isLogin(Long id) {
+        String selectByEmailAndPass = "from Users t where t.id = :idParam";
         Query query = getSession().createQuery(selectByEmailAndPass);
+        query.setParameter("idParam", id);
         Users user = (Users) query.uniqueResult();
         if (user.getIsLogin() == null) user.setIsLogin(0);
         return user.getIsLogin();
@@ -32,10 +33,6 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
     //rewrite these two methods in one
     @Override
     public void setLoginStatus(Users user, int i) {
-        //первый вариант: через if
-//        if (user.getIsLogin() == null || user.getIsLogin() == 0) user.setIsLogin(1);
-//        else user.setIsLogin(0);
-        //второй: через доп параметр
         user.setIsLogin(i);
         entityManager.merge(user);
     }

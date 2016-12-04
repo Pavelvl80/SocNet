@@ -1,8 +1,10 @@
 package com.service;
 
 import com.model.Users;
+import com.sun.deploy.nativesandbox.comm.Response;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,8 +34,11 @@ public interface UserService {
 //    UserOld logout(UserOld user);
     List<Users> getUsers();
 
-    String checkIsLogin();
+    Users checkIsLogin(Users users);
 
     Long getUsersCount();
+
+    String forProfile(Users user);
+
 
 }

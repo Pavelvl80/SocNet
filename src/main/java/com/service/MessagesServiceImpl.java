@@ -34,7 +34,6 @@ public class MessagesServiceImpl implements MessagesService {
         return null;
     }
 
-    //TODO you don't need to use all USERS object, just id is enough
     @Override
     public List<Messages> getMessagesByUser(Long id) {
         return messageDAO.getByUserId(id);
@@ -58,5 +57,10 @@ public class MessagesServiceImpl implements MessagesService {
             result = "sent";
         }
         return result;
+    }
+
+    @Override
+    public List<Messages> getLastNumbMessagesByUserId(Long id) {
+        return messageDAO.getTenLastMessagesByUserId(id);
     }
 }

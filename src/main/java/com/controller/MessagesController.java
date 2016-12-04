@@ -36,7 +36,7 @@ public class MessagesController {
         messagesService.saveMessageService(messages);
 
         ModelAndView modelAndView = new ModelAndView("text");
-        modelAndView.addObject("text", "messages was sent");
+        modelAndView.addObject("result", "messages was sent");
         return modelAndView;
     }
 
@@ -76,12 +76,12 @@ public class MessagesController {
         List<Users> userList = userDAO.getAll();
         Users fromUser = userList.get(0);
         Users toUser = userList.get(1);
-        Messages messages = new Messages("ХАЛО!! тест", fromUser, toUser);
+        Messages messages = new Messages("первое!! тест", fromUser, toUser);
 
-        String text = messagesService.saveMessageIfLogin(messages);
+        String result = messagesService.saveMessageIfLogin(messages);
 
         ModelAndView modelAndView = new ModelAndView("text");
-        modelAndView.addObject("text", text);
+        modelAndView.addObject("result", result);
         return modelAndView;
     }
 
@@ -90,5 +90,15 @@ public class MessagesController {
 //        List<Users> userList = userDAO.getAll();
 //        Users fromUser = userList.get(0);
 //    }
+
+    @RequestMapping("/lastMessages")
+    public ModelAndView lastMessages() {
+        List<Messages> messages = messagesService.getLastNumbMessagesByUserId(1025l);
+
+        ModelAndView modelAndView = new ModelAndView("messagesList");
+        modelAndView.addObject("messages", messages);
+
+        return modelAndView;
+    }
 
 }

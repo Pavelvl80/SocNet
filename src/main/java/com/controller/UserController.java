@@ -7,13 +7,16 @@ import com.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 
 @Controller
-public class UserController {
+public class UserController extends HttpServlet {
 
 
     @Autowired
@@ -40,23 +43,25 @@ public class UserController {
 
     @RequestMapping("/isLogin")
     ModelAndView isLogin() {
-        String msg = userService.checkIsLogin();
+        Users user = userService.getUsers().get(0);
+        Users msg = userService.checkIsLogin(user);
         ModelAndView modelAndView = new ModelAndView("text");
-        modelAndView.addObject("text", msg);
+        modelAndView.addObject("result", msg);
         return modelAndView;
     }
 
     @RequestMapping("/login")
     ModelAndView login() throws Exception {
-        String email = "victor@mail.com";
+        String email = "lotar@mail.com";
         String password = "12345";
 
         String result = userService.login(email, password);
 
-        ModelAndView modelAndView = new ModelAndView("welcome");
+        ModelAndView modelAndView = new ModelAndView("text");
         modelAndView.addObject("result", result);
         modelAndView.addObject("state", "logged in");
         return modelAndView;
+
     }
 
     //
@@ -73,8 +78,8 @@ public class UserController {
     ModelAndView countUsers() {
         Long usersCount = userService.getUsersCount();
 
-        ModelAndView modelAndView = new ModelAndView("usersCount");
-        modelAndView.addObject("usersCount", usersCount);
+        ModelAndView modelAndView = new ModelAndView("text");
+        modelAndView.addObject("result", usersCount);
         return modelAndView;
     }
 
@@ -90,13 +95,13 @@ public class UserController {
     }
 
     //
-    @RequestMapping("/register")
-    ModelAndView register() throws Exception {
+    @RequestMapping(value = "/register")
+    ModelAndView register() {
         Users user = new Users("victor@mail.com", "12345", "admin", "Victor");
 
         String savedUser = userService.registerUser(user);
 
-        ModelAndView modelAndView = new ModelAndView("welcome");
+        ModelAndView modelAndView = new ModelAndView("text");
         modelAndView.addObject("user", user);
         modelAndView.addObject("result", savedUser);
         modelAndView.addObject("state", "register");
@@ -105,12 +110,13 @@ public class UserController {
     }
 
     @RequestMapping("/profile")
-    ModelAndView profile() throws Exception {
-        Users userProfile = userDAO.getByUser();
+    ModelAndView profile() {
+
+        Users user = userService.getUsers().get(1);
+        Users userProfile = userService.checkIsLogin(user);
 
         ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("user", userProfile);
-
         return modelAndView;
     }
 
@@ -128,8 +134,8 @@ public class UserController {
     @RequestMapping("/cleanUsers")
     ModelAndView clean() {
         userService.cleanUsers();
-        ModelAndView modelAndView = new ModelAndView("usersCount");
-        modelAndView.addObject("usersCount", userService.getUsersCount());
+        ModelAndView modelAndView = new ModelAndView("text");
+        modelAndView.addObject("result", userService.getUsersCount());
         return modelAndView;
     }
 //
