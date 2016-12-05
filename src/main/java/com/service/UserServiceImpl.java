@@ -97,10 +97,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String logout(Users user) {
         String result = "Error";
-        Users finUser = userDAO.getByUser();
 
-        if (finUser != null) {
-            userDAO.setLoginStatus(finUser, 0);
+        if (user != null) {
+            userDAO.setLoginStatus(user, 0);
             result = "Successful logout";
         }
         return result;
@@ -116,6 +115,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String forProfile(Users user) {
-        return null;
+        userDAO.isLogin(user.getId());
+
+        return "localhost:8080/login";
     }
 }

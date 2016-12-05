@@ -4,11 +4,14 @@ package com.controller;
 import com.service.UserService;
 import com.model.Users;
 import com.dao.UserDAO;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
@@ -86,11 +89,11 @@ public class UserController extends HttpServlet {
     //
     @RequestMapping("/logout")
     ModelAndView logout() {
-        Users user = new Users("victor@mail.com", "12345", "admin", "Victor");
+        Users user = userService.getUsers().get(0);
 
-        userService.logout(user);
+        String result = userService.logout(user);
         ModelAndView modelAndView = new ModelAndView("text");
-        modelAndView.addObject("text", "logout complete");
+        modelAndView.addObject("result", result);
         return modelAndView;
     }
 
@@ -110,15 +113,17 @@ public class UserController extends HttpServlet {
     }
 
     @RequestMapping("/profile")
-    ModelAndView profile() {
+    Object profile() {
+        Users user = userService.getUsers().get(0);
+        Users users = userService.checkIsLogin(user);
 
-        Users user = userService.getUsers().get(1);
-        Users userProfile = userService.checkIsLogin(user);
+        if (users == null) return "redirect:/login";
 
         ModelAndView modelAndView = new ModelAndView("profile");
-        modelAndView.addObject("user", userProfile);
+        modelAndView.addObject("user", users);
         return modelAndView;
     }
+
 
     //
 //    void addToFriend() throws Exception {
