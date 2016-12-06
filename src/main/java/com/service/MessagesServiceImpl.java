@@ -7,6 +7,10 @@ import com.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -62,5 +66,10 @@ public class MessagesServiceImpl implements MessagesService {
     @Override
     public List<Messages> getLastNumbMessagesByUserId(Long id) {
         return messageDAO.getTenLastMessagesByUserId(id);
+    }
+
+    @Override
+    public List<Messages> getMessagesByUserIdAndDate(Long id, String ddMMyyyy) throws Exception {
+        return messageDAO.getMessagesByDate(id, ddMMyyyy);
     }
 }

@@ -6,6 +6,8 @@ import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -64,10 +66,28 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
 
     @Override
     public List<Messages> getTenLastMessagesByUserId(Long id) {
-        String hql = "from Messages t where t.id.fromUser.id = :idParam order by t.id DESC";
+        String hql = "from Messages t where t.fromUser.id = :idParam order by t.id DESC";
         Query query = getSession().createQuery(hql);
         query.setParameter("idParam", id);
         query.setMaxResults(10);
+        return query.list();
+    }
+
+    @Override
+    public List<Messages> getMessagesByDate(Long id,String ddMMyyyy) throws Exception {
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(ddMMyyyy);
+
+
+        String hql = "FROM Messages t WHERE t.fromUser.id = :idParam OR t.toUser.id = :idParam AND t.dateSent >= :dateParam AND t.dateSent < :dateParamPlus ";
+
+        long plus = date.getTime() + 1 * 24 * 60 * 60 * 1000;
+        Date datePlus = new Date(plus);
+
+
+        Query query = getSession().createQuery(hql);
+        query.setParameter("dateParam", date);
+        query.setParameter("dateParamPlus", datePlus);
+        query.setParameter("idParam", id);
         return query.list();
     }
 }

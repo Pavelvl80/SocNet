@@ -4,6 +4,7 @@ import com.model.Messages;
 import com.model.Users;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface MessageDAO {
     Messages changeActiveStatus(Messages message, int i);
 
     List<Messages> getTenLastMessagesByUserId(Long id);
+
+    List<Messages> getMessagesByDate(Long id, String ddMMyyyy) throws Exception;
 }

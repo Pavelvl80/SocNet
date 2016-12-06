@@ -6,7 +6,7 @@
 </head>
 <br>
 <!--this is bad way to call userName, too complex, just add userName to model attributes -->
-${userName}'s messages: <br>
+${userName} <br>
 <br>
 <c:forEach items="${messages}" var="message">
     To user: ${message.toUser.userName} <br> text: ${message.msg} <br> data sent ${message.dateSent}, data read ${message.dateRead} <br>

@@ -6,6 +6,7 @@ import com.model.Users;
 import com.dao.MessageDAO;
 import com.dao.UserDAO;
 import com.service.MessagesService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class MessagesController {
         List<Users> userList = userDAO.getAll();
         Users fromUser = userList.get(0);
         Users toUser = userList.get(1);
-        Messages messages = new Messages("Привет!! тест", fromUser, toUser);
+        Messages messages = new Messages("1025 to 1026", fromUser, toUser);
 
         messagesService.saveMessageService(messages);
 
@@ -55,7 +56,7 @@ public class MessagesController {
 
         ModelAndView modelAndView = new ModelAndView("messagesList");
         modelAndView.addObject("messages", messages);
-        modelAndView.addObject("userName", user.getUserName());
+        modelAndView.addObject("userName", user.getUserName() + "'s messages:");
         return modelAndView;
     }
 
@@ -94,6 +95,16 @@ public class MessagesController {
     @RequestMapping("/lastMessages")
     public ModelAndView lastMessages() {
         List<Messages> messages = messagesService.getLastNumbMessagesByUserId(1025l);
+
+        ModelAndView modelAndView = new ModelAndView("messagesList");
+        modelAndView.addObject("messages", messages);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/messagesByDate")
+    public ModelAndView messagesByDate() throws Exception {
+        List<Messages> messages = messagesService.getMessagesByUserIdAndDate(1026l, "06/12/2016");
 
         ModelAndView modelAndView = new ModelAndView("messagesList");
         modelAndView.addObject("messages", messages);

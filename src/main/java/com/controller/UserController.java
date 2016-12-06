@@ -23,7 +23,7 @@ public class UserController extends HttpServlet {
 
 
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     //
     @Autowired
@@ -143,6 +143,11 @@ public class UserController extends HttpServlet {
         modelAndView.addObject("result", userService.getUsersCount());
         return modelAndView;
     }
+
+//    @RequestMapping("/messagesByDate")
+//    ModelAndView messagesByDate() {
+//
+//    }
 //
 //
 //    //getUserMessages - size - count messages

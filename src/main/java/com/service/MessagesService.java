@@ -25,4 +25,6 @@ public interface MessagesService {
 
     List<Messages> getLastNumbMessagesByUserId(Long id);
 
+    List<Messages> getMessagesByUserIdAndDate(Long id, String ddMMyyyy) throws Exception;
+
 }
