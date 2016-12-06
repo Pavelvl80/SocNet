@@ -104,7 +104,7 @@ public class MessagesController {
 
     @RequestMapping("/messagesByDate")
     public ModelAndView messagesByDate() throws Exception {
-        List<Messages> messages = messagesService.getMessagesByUserIdAndDate(1026l, "06/12/2016");
+        List<Messages> messages = messagesService.getMessagesByUserIdAndDate(1025l, "03/12/2016");
 
         ModelAndView modelAndView = new ModelAndView("messagesList");
         modelAndView.addObject("messages", messages);
