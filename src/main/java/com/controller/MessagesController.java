@@ -30,9 +30,9 @@ public class MessagesController {
     @RequestMapping("/sendMessage")
     ModelAndView sendMessage() {
         List<Users> userList = userDAO.getAll();
-        Users fromUser = userList.get(0);
-        Users toUser = userList.get(1);
-        Messages messages = new Messages("1025 to 1026", fromUser, toUser);
+        Users fromUser = userList.get(2);
+        Users toUser = userList.get(0);
+        Messages messages = new Messages("от бузымянного к лотару", fromUser, toUser);
 
         messagesService.saveMessageService(messages);
 
@@ -104,9 +104,12 @@ public class MessagesController {
 
     @RequestMapping("/messagesByDate")
     public ModelAndView messagesByDate() throws Exception {
-        List<Messages> messages = messagesService.getMessagesByUserIdAndDate(1025l, "03/12/2016");
+        Long id = 1025l;
+        List<Messages> messages = messagesService.getMessagesByUserIdAndDate(1025l, "07/12/2016");
+
 
         ModelAndView modelAndView = new ModelAndView("messagesList");
+        modelAndView.addObject("userName", "from " + id);
         modelAndView.addObject("messages", messages);
 
         return modelAndView;

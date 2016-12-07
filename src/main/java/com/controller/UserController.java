@@ -55,7 +55,7 @@ public class UserController extends HttpServlet {
 
     @RequestMapping("/login")
     ModelAndView login() throws Exception {
-        String email = "lotar@mail.com";
+        String email = "nameless@gmail.com";
         String password = "12345";
 
         String result = userService.login(email, password);
@@ -100,7 +100,7 @@ public class UserController extends HttpServlet {
     //
     @RequestMapping(value = "/register")
     ModelAndView register() {
-        Users user = new Users("victor@mail.com", "12345", "admin", "Victor");
+        Users user = new Users("nameless@gmail.com", "12345", "admin", "Nameless");
 
         String savedUser = userService.registerUser(user);
 

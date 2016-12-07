@@ -75,18 +75,12 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
 
     @Override
     public List<Messages> getMessagesByDate(Long id, String ddMMyyyy) throws Exception {
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(ddMMyyyy);
 
-
-        String hql = "FROM Messages t WHERE t.fromUser.id = :idParam AND t.toUser.id = :idParam OR t.dateSent >= :dateParam AND t.dateSent < :dateParamPlus ";
-
-        long plus = date.getTime() + 1 * 24 * 60 * 60 * 1000;
-        Date datePlus = new Date(plus);
+        String hql = "FROM Messages t WHERE to_char(t.dateSent, 'DD/MM/YYYY') = :dateParam AND t.fromUser.id = :idParam OR t.toUser.id = :idParam";
 
 
         Query query = getSession().createQuery(hql);
-        query.setParameter("dateParam", date);
-        query.setParameter("dateParamPlus", datePlus);
+        query.setParameter("dateParam", ddMMyyyy);
         query.setParameter("idParam", id);
         return query.list();
     }
