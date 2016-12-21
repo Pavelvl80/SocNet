@@ -1,5 +1,9 @@
 package com.controller;
 
+import com.dao.UserDAO;
+import com.google.gson.Gson;
+import com.model.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
+
 @Controller
 public class TestController {
+
+    @Autowired
+    UserDAO userDAO;
 
     @RequestMapping(value = "/test")
     public ModelAndView test() {
@@ -49,16 +59,39 @@ public class TestController {
 
     @RequestMapping(value = "/displayTest")
     public ModelAndView displayTest() {
-        ModelAndView modelAndView = new ModelAndView("displayTestPost.vm");
+        ModelAndView modelAndView = new ModelAndView("displayTest.vm");
         return modelAndView;
     }
 
     @RequestMapping(value = "/display_test", method = RequestMethod.GET)
-    public ModelAndView  displayTest(@RequestParam String email, @RequestParam String name, @RequestParam String pass) {
-        String result = "{'email' : '" + email + "', 'name' : '" + name + "', 'pass' : '" + pass + "'};";
-        ModelAndView modelAndView = new ModelAndView("displayTestPost.vm");
-        modelAndView.addObject("result", result);
-        return modelAndView;
+    public ResponseEntity<String> displayTest(@RequestParam String email, @RequestParam String name, @RequestParam String pass) {
+        String result = "{\"email\" : \"" + email + "\", \"name\" : \"" + name + "\", \"pass\" : \"" + pass + "\"};";
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/checkEquals")
+    public ModelAndView checkEquals() {
+        return new ModelAndView("/new.vm");
+    }
+
+    @RequestMapping(value = "/checkEqualsRequest")
+    public ResponseEntity<String> checkEquals(@RequestParam String first, @RequestParam String second) {
+        ResponseEntity response;
+        if (first.equals(second)) response = new ResponseEntity(HttpStatus.OK);
+        else response = new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        return response;
+    }
+
+    @RequestMapping(value = "/testUserCount")
+    public ModelAndView testUserCont() {
+        return new ModelAndView("testUserCount.vm");
+    }
+
+    @RequestMapping(value = "/testUserCountRequest")
+    public ResponseEntity<String> stringResponseEntity(@RequestParam Integer numb) {
+        List<Users> users = userDAO.getNumbUsers(numb);
+        String json = new Gson().toJson(users);
+        return new ResponseEntity(json, HttpStatus.OK);
     }
 
 

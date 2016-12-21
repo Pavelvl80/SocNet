@@ -9,11 +9,6 @@
 <button onclick="displayTest()">Button</button>
 
 
-
-
-<div id="myDiv"><h2>Позволить AJAX изменить этот текст</h2></div>
-<button type="button" onclick="myFunction()">Изменить Содержимое</button>
-
 </body>
 </html>
 
@@ -26,19 +21,18 @@
         $.ajax({
             url: '/display_test',
             data: ({
-                email: 'test@mail.com',
-                name: 'testName',
-                pass: 'TestPass'
+                email: $('#email').val(),
+                name: $('#name').val(),
+                pass: $('#pass').val()
             }),
             success: function (data) {
-                alert($('result'));
+                alert(data);
             },
             error: function (xhr) {
                 alert('error');
             }
         });
-    }
-    ;
+    };
 
 
 </script>

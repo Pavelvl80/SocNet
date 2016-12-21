@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title></title>
+</head>
+
+
+<body>
+<header>
+    Test
+</header>
+
+<input id="first">first</input> <br> <input id="second">second</input> <br>
+<button onclick="checkEqualsRequest()">send</button>
+
+
+<script src="//cdn.polyfill.io/v1/polyfill.js?features=es6"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script>
+    function checkEqualsRequest() {
+        $.ajax({
+            url: '/checkEqualsRequest',
+            data: ({
+                first: $('#first').val(),
+                second: $('#second').val()
+            }),
+            success: function (data) {
+
+                alert('OK');
+            },
+            error: function (xhr) {
+                alert('ERROR');
+            }
+        });
+    }
+    ;
+</script>
+
+
+</body>
+</html>

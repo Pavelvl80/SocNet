@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.model.Messages;
 import com.model.Users;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public interface UserDAO {
     Integer isLogin(Long id);
 
     Long getCount();
+
+    List<Users> getNumbUsers(Integer numb);
 
 
 }

@@ -123,4 +123,12 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
 
         return (Users) query.uniqueResult();
     }
+
+    @Override
+    public List<Users> getNumbUsers(Integer numb) {
+        String hql = "from Users t";
+        Query query = getSession().createQuery(hql);
+        query.setMaxResults(numb);
+        return query.list();
+    }
 }

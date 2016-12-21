@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title></title>
+</head>
+
+<body>
+<input id="numb">numb</input> <br>
+<button onclick="testUserCountRequest()">Button</button>
+
+
+</body>
+</html>
+
+<script src="//cdn.polyfill.io/v1/polyfill.js?features=es6"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script>
+    function testUserCountRequest() {
+        $.ajax({
+            url: '/testUserCountRequest',
+            data: ({
+                numb: $('#numb').val(),
+            }),
+            success: function (data) {
+                alert(data);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    };
+
+
+</script>
+</body>
+</html>
