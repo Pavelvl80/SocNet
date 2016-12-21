@@ -76,7 +76,7 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
     @Override
     public List<Messages> getMessagesByDate(Long id, String ddMMyyyy) throws Exception {
 
-        String hql = "FROM Messages t WHERE to_char(t.dateSent, 'DD/MM/YYYY') = :dateParam AND t.fromUser.id = :idParam OR t.toUser.id = :idParam";
+        String hql = "FROM Messages t WHERE to_char(t.dateSent, 'DD/MM/YYYY') = :dateParam AND (t.fromUser.id = :idParam OR t.toUser.id = :idParam)";
 
 
         Query query = getSession().createQuery(hql);

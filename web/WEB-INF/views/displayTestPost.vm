@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title></title>
+</head>
+
+<body>
+<input id="email">email</input> <br> <input id="name">name</input> <br> <input id="pass">pass</input> <br>
+<button onclick="displayTest()">Button</button>
+
+
+
+
+<div id="myDiv"><h2>Позволить AJAX изменить этот текст</h2></div>
+<button type="button" onclick="myFunction()">Изменить Содержимое</button>
+
+</body>
+</html>
+
+<script src="//cdn.polyfill.io/v1/polyfill.js?features=es6"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script>
+    function displayTest() {
+        $.ajax({
+            url: '/display_test',
+            data: ({
+                email: 'test@mail.com',
+                name: 'testName',
+                pass: 'TestPass'
+            }),
+            success: function (data) {
+                alert($('result'));
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+    ;
+
+
+</script>
+</body>
+</html>

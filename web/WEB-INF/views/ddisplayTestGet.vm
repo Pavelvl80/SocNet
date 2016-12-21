@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title></title>
+</head>
+
+
+<body>
+<p><script>${'result'}</script></p>
+
+<header>
+    Test
+</header>
+
+
+<script src="//cdn.polyfill.io/v1/polyfill.js?features=es6"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+
+
+</body>
+</html>

@@ -6,9 +6,12 @@ import com.model.Users;
 import com.dao.UserDAO;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
@@ -144,21 +147,22 @@ public class UserController extends HttpServlet {
         return modelAndView;
     }
 
-//    @RequestMapping("/messagesByDate")
-//    ModelAndView messagesByDate() {
-//
-//    }
-//
-//
-//    //getUserMessages - size - count messages
-//    //getMessages()
-//
-//
-////    List<Messages> getMessages(long userId) {
-////        //if (!fromUser.isLogged()) throw new Exception("you are is not logged in");
-////        return messageDAO.getByUserId(userId);
-////    }
-//
+    @RequestMapping(value = "/login_request")
+    ResponseEntity<String> loginRequest(@RequestParam String email, @RequestParam String name) {
+        ResponseEntity<String> response;
+        if (validateEmail(email) && validateUserName(name))
+            response = new ResponseEntity<String>(HttpStatus.OK);
+        else response = new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE);
+        return response;
+    }
+
+    private boolean validateEmail(String email) {
+        return email.contains("@") && email.contains("mail");
+    }
+
+    private boolean validateUserName(String name) {
+        return name != null && name.length() < 10;
+    }
 //
 //    Map<UserOld, List<Messages>> getMessageByUsers(List<UserOld> users) {
 //       //TODO make implemetation
