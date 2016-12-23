@@ -131,4 +131,13 @@ public class UserDAOImpl extends AbstractDAOImplDB<Users> implements UserDAO {
         query.setMaxResults(numb);
         return query.list();
     }
+
+    @Override
+    public Users getByUserName(String userName) {
+        String requestToDb = "from Users t where t.userName = :userName";
+        Query query = getSession().createQuery(requestToDb);
+        query.setParameter("userName", userName);
+
+        return (Users) query.uniqueResult();
+    }
 }

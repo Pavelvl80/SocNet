@@ -30,10 +30,9 @@ public class MessageDAOImpl extends AbstractDAOImplDB<Messages> implements Messa
     @Override
 //    @SuppressWarnings("unchecked")
     public List<Messages> getByUserId(Long id) {
-        String hql = "from Messages t where t.fromUser.id = :fromUserId OR t.toUser.id = :toUserId";
+        String hql = "from Messages t where t.fromUser.id = :id OR t.toUser.id = :id";
         Query query = getSession().createQuery(hql);
-        query.setParameter("fromUserId", id);
-        query.setParameter("toUserId", id);
+        query.setParameter("id", id);
         return query.list();
     }
 

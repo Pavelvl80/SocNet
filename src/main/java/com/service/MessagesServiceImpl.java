@@ -44,7 +44,7 @@ public class MessagesServiceImpl implements MessagesService {
     }
 
     @Override
-    public Messages saveMessageService(Messages messages) {
+    public Messages saveMessage(Messages messages) {
         return messageDAO.saveMessage(messages);
     }
 

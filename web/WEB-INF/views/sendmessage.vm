@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title></title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<body>
+<input id="message">message</input>
+<br>
+<input id="usernamefrom">User name from</input>
+<br>
+<input id="usernameto">User name to</input>
+<br>
+<button onclick="send()">Send</button>
+
+<header>
+    Test
+</header>
+
+<script>
+    function send() {
+        if ($('#message').val().length < 2) {
+            alert('message is too small')
+            return;
+        }
+
+        $.ajax({
+            url: '/send_message',
+            data: ({
+                message: $('#message').val(),
+                usernamefrom: $('#usernamefrom').val(),
+                usernameto: $('#usernameto').val()
+            }),
+            success: function (data) {
+                alert('message was sent');
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+    }
+</script>
+
+
+</body>
+</html>

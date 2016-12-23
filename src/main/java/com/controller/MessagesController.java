@@ -1,15 +1,20 @@
 package com.controller;
 
 
+import com.google.gson.Gson;
 import com.model.Messages;
 import com.model.Users;
 import com.dao.MessageDAO;
 import com.dao.UserDAO;
 import com.service.MessagesService;
+import com.service.UserService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,20 +31,8 @@ public class MessagesController {
     @Autowired
     private UserDAO userDAO;
 
-
-    @RequestMapping("/sendMessage")
-    ModelAndView sendMessage() {
-        List<Users> userList = userDAO.getAll();
-        Users fromUser = userList.get(2);
-        Users toUser = userList.get(0);
-        Messages messages = new Messages("от бузымянного к лотару", fromUser, toUser);
-
-        messagesService.saveMessageService(messages);
-
-        ModelAndView modelAndView = new ModelAndView("text");
-        modelAndView.addObject("result", "messages was sent");
-        return modelAndView;
-    }
+    @Autowired
+    private UserService userService;
 
    /* @RequestMapping("/messagesCount")
     ModelAndView getMessages() {
@@ -115,4 +108,32 @@ public class MessagesController {
         return modelAndView;
     }
 
+    @RequestMapping("/send_message")
+    ResponseEntity<String> sendMessage(@RequestParam("usernamefrom") String userNameFrom,
+                                       @RequestParam("usernameto") String userNameTo, @RequestParam String message) {
+        //check users - if not exist 404
+        //create message
+        //send message
+        Users userFrom = userService.getByUserName(userNameFrom);
+        Users userTo = userService.getByUserName(userNameTo);
+        if (userService.getByUserName(userNameFrom) == null || userService.getByUserName(userNameTo) == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        Messages messagesObj = new Messages(message, userFrom, userTo);
+        if (messagesService.saveMessage(messagesObj) == null)
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping("/get_messages")
+    ResponseEntity<String> getMessages(@RequestParam("username") String userName, @RequestParam String email) {
+        Users user = userDAO.getByEmailOrUserName(email, userName);
+        if (user == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        String users = new Gson().toJson(messageDAO.getByUserId(user.getId()));
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 }

@@ -34,7 +34,10 @@ public interface UserService {
 //    UserOld logout(UserOld user);
     List<Users> getUsers();
 
+    //TODO
     Users checkIsLogin(Users users);
+
+    Users getByUserName(String userName);
 
     Long getUsersCount();
 

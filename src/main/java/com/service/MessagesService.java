@@ -15,7 +15,7 @@ public interface MessagesService {
 
     Integer isLogged();
 
-    Messages saveMessageService(Messages messages);
+    Messages saveMessage(Messages messages);
 
     List<Messages> getMessagesByUser(Long id);
 

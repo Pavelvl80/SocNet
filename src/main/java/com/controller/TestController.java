@@ -3,6 +3,7 @@ package com.controller;
 import com.dao.UserDAO;
 import com.google.gson.Gson;
 import com.model.Users;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -94,6 +95,15 @@ public class TestController {
         return new ResponseEntity(json, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/sendMessage")
+    ModelAndView sendMessage() {
+        return new ModelAndView("sendmessage.vm");
+    }
+
+    @RequestMapping(value = "/getMessages")
+    ModelAndView getMessages() {
+        return new ModelAndView("watchmessages.vm");
+    }
 
     private boolean validateEmail(String email) {
         return email.contains("@") && email.contains("mail");

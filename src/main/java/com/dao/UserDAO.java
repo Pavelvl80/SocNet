@@ -31,5 +31,5 @@ public interface UserDAO {
 
     List<Users> getNumbUsers(Integer numb);
 
-
+    Users getByUserName(String userName);
 }

@@ -119,4 +119,9 @@ public class UserServiceImpl implements UserService {
 
         return "localhost:8080/login";
     }
+
+    @Override
+    public Users getByUserName(String userName) {
+        return userDAO.getByUserName(userName);
+    }
 }
