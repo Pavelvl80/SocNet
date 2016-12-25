@@ -1,13 +1,10 @@
 package com.service;
 
-import com.model.Users;
 import com.dao.UserDAO;
-import com.sun.deploy.nativesandbox.comm.Response;
+import com.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**

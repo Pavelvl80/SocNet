@@ -1,10 +1,8 @@
 package com.service;
 
 import com.model.Users;
-import com.sun.deploy.nativesandbox.comm.Response;
 import org.springframework.stereotype.Repository;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,7 +16,8 @@ public interface UserService {
     String registerUser(Users user);
 
     String logout(Users user);
-//
+
+    //
 //    UserOld get(String name, String psw);
 //
 //    void setLogin(Users user);
@@ -26,11 +25,13 @@ public interface UserService {
 //    List<UserOld> getAll();
 //
     void cleanUsers();
-//
+
+    //
 //    void addToFriend(UserOld fromUser, UserOld toUser) throws Exception;
 //
     String login(String userName, String password);
-//
+
+    //
 //    UserOld logout(UserOld user);
     List<Users> getUsers();
 
